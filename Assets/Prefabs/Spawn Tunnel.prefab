@@ -337,9 +337,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139e86f1452cb7243af8947c585d9abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5694930849326735971, guid: a5a7f9c205552514a90ed43b1eceb5f6, type: 3}
-  enemyCount: 0
+  enemies:
+  - {fileID: 5694930849326735971, guid: a5a7f9c205552514a90ed43b1eceb5f6, type: 3}
+  - {fileID: 4561285112282783055, guid: 02a7383323687ce4db01c4f78226326c, type: 3}
+  - {fileID: 7436166577222924703, guid: fd274df0c2ecf79478c04a9f8c697043, type: 3}
+  - {fileID: 1613376636619591335, guid: 74f4c6ef61849324ea11ce38aeadcb51, type: 3}
   waveNumber: 1
+  waitToSpawn: 2
 --- !u!1 &4911996462450828319
 GameObject:
   m_ObjectHideFlags: 0

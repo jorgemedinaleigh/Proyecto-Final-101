@@ -4,36 +4,45 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    public int enemyCount;
-    public int waveNumber = 1;
+    [SerializeField] GameObject[] enemies;
+    [SerializeField] int waveNumber = 1;
+    [SerializeField] float waitToSpawn = 2f;
+
+    private int bossCount = 0;
+    private IEnumerator coroutine;
 
     void Start()
     {
-        SpawnEnemyWave(waveNumber);
+        SpawnEnemyWave();
     }
 
     void Update()
     {
-        
+        SpawnNextWave();
     }  
 
-    void SpawnEnemyWave(int enemiesToSpawn)
+    IEnumerator SpawnEnemy(int index)
+    {        
+        Instantiate(enemies[index], transform.position, enemies[index].transform.rotation);
+        yield return new WaitForSeconds(waitToSpawn);
+    }
+
+    void SpawnEnemyWave()
     {
-        for (int i = 0; i < enemiesToSpawn; i++)
+        for (int i = 0; i < waveNumber; i++)
         {
-            Instantiate(enemyPrefab, transform.position, enemyPrefab.transform.rotation);
+            coroutine = SpawnEnemy(i);
+            StartCoroutine(coroutine);
+            StopCoroutine(coroutine);
         }
     }
-    
-    /*void SpawnNextWave()
-    {
-        enemyCount = FindObjectsOfType<EnemyController>().Length;
 
-        if(enemyCount == 0)
+    void SpawnNextWave()
+    {
+        if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             waveNumber++;
-            SpawnEnemyWave(waveNumber);
+            SpawnEnemyWave();
         }
-    }*/
+    }
 }
