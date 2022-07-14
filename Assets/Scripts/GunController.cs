@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class GunController : MonoBehaviour
 {
-    public float speed = 1f;
+    [SerializeField] float speed = 1f;
     private GameObject player;
 
     void Start()
@@ -12,15 +12,9 @@ public class EnemyController : MonoBehaviour
         player = GameObject.Find("Player");
     }
 
-
     void Update()
     {
-        PursuePlayer();
-    }
-
-    void PursuePlayer()
-    {
         Vector3 lookDirection = (player.transform.position - transform.position).normalized;
-        transform.position = transform.position + lookDirection * speed * Time.deltaTime;
+        transform.LookAt(lookDirection);
     }
 }

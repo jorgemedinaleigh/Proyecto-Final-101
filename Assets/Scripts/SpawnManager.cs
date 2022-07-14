@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        SpawnNextWave();
+        
     }  
 
     void SpawnEnemyWave(int enemiesToSpawn)
@@ -26,7 +26,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
     
-    void SpawnNextWave()
+    /*void SpawnNextWave()
     {
         enemyCount = FindObjectsOfType<EnemyController>().Length;
 
@@ -35,5 +35,5 @@ public class SpawnManager : MonoBehaviour
             waveNumber++;
             SpawnEnemyWave(waveNumber);
         }
-    }
+    }*/
 }
