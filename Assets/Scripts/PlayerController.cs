@@ -6,11 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     CharacterController characterController;
 
-    public float MovementSpeed = 1;
-    public float Gravity = 9.8f;
+    [SerializeField] float movementSpeed = 1;
+    [SerializeField] float gravity = 1f;
     public Camera cam;
 
-    private float velocity = 0;
+    private Vector3 moveDirection = Vector3.zero;
 
     void Start()
     {
@@ -20,26 +20,26 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         CharacterMovement();
-        ProcessGravity();
+        ProcessJumping();
     }
 
     void CharacterMovement()
     {
-        float horizontal = Input.GetAxis("Horizontal") * MovementSpeed;
-        float vertical = Input.GetAxis("Vertical") * MovementSpeed;
+        float horizontal = Input.GetAxis("Horizontal") * movementSpeed;
+        float vertical = Input.GetAxis("Vertical") * movementSpeed;
         characterController.Move((cam.transform.right * horizontal + cam.transform.forward * vertical) * Time.deltaTime);
     }
 
-    void ProcessGravity()
+    void ProcessJumping()
     {
         if (characterController.isGrounded)
         {
-            velocity = 0;
+            moveDirection.y = 0;
         }
         else
         {
-            velocity -= Gravity * Time.deltaTime;
-            characterController.Move(new Vector3(0, velocity, 0));
+            moveDirection.y -= gravity * Time.deltaTime;
+            characterController.Move(moveDirection * Time.deltaTime);
         }
     }
 }

@@ -14,6 +14,7 @@ public class MouseHandler : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
