@@ -7,11 +7,21 @@ public class WeaponController : MonoBehaviour
     public WeaponStats weaponStats;
     private Camera cam;
     private float nextFire;
+    private int bulletsLeft;
+    private int bulletsShot;
+    private bool shooting;
+    private bool reloading;
+
     [SerializeField] private Transform tipOfGun;
+
+    private void Awake()
+    {
+        nextFire = weaponStats.fireRate;
+        bulletsLeft = weaponStats.magazineSize;
+    }
 
     private void Start()
     {
-        nextFire = weaponStats.fireRate;
         cam = Camera.main;
     }
 
@@ -36,8 +46,10 @@ public class WeaponController : MonoBehaviour
             case WeaponType.SHOTGUN:
                 if(Time.time >= nextFire)
                 {
+                    bulletsShot = weaponStats.bulletsPerTap;
                     nextFire = Time.time + weaponStats.fireRate;
                     ShotgunShot();
+                    bulletsLeft--;
                 }
                 break;
             case WeaponType.RIFLE:
@@ -52,21 +64,31 @@ public class WeaponController : MonoBehaviour
 
     private void OneShot()
     {
+        float x = Random.Range(-weaponStats.spread, weaponStats.spread);
+        float y = Random.Range(-weaponStats.spread, weaponStats.spread);
+
         GameObject bulletInstance = Instantiate(weaponStats.bullet, tipOfGun.position, tipOfGun.rotation);
         var rb = bulletInstance.GetComponent<Rigidbody>();
-        rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed);
+        rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed + new Vector3(x, y, 0));
+
+        bulletsLeft--;
     }
 
-    private void ShotgunShot() //por corregir
+    private void ShotgunShot()
     {
-        Vector3 euler = transform.eulerAngles;
-        euler.x = Random.Range(-40f, 40f);
-        euler.y = Random.Range(-40f, 40f);
-        transform.eulerAngles = euler;
+        float x = Random.Range(-weaponStats.spread, weaponStats.spread);
+        float y = Random.Range(-weaponStats.spread, weaponStats.spread);
 
-        GameObject pelletInstance = Instantiate(weaponStats.bullet, tipOfGun.position, tipOfGun.rotation);
-        var rb = pelletInstance.GetComponent<Rigidbody>();
-        rb.AddForce(euler * weaponStats.bulletSpeed);
+        GameObject bulletInstance = Instantiate(weaponStats.bullet, tipOfGun.position, tipOfGun.rotation);
+        var rb = bulletInstance.GetComponent<Rigidbody>();
+        rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed + new Vector3(x, y, 0));
+
+        bulletsShot--;
+
+        if(bulletsShot > 0)
+        {
+            Invoke("ShotgunShot", 0);
+        }
     }
 
     private Vector3 CalculateDirection()
