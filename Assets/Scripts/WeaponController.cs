@@ -7,10 +7,9 @@ public class WeaponController : MonoBehaviour
     public WeaponStats weaponStats;
     private Camera cam;
     private float nextFire;
-    private int bulletsLeft;
+    public int bulletsLeft;
     private int bulletsShot;
-    private bool shooting;
-    private bool reloading;
+    private bool reloading = false;
 
     [SerializeField] private Transform tipOfGun;
 
@@ -32,31 +31,59 @@ public class WeaponController : MonoBehaviour
             case WeaponType.REVOLVER:
                 if (Time.time >= nextFire)
                 {
-                    nextFire = Time.time + weaponStats.fireRate;
-                    OneShot();
+                    if(bulletsLeft > 0 && !reloading)
+                    {
+                        nextFire = Time.time + weaponStats.fireRate;
+                        OneShot();
+                    }
+                    else
+                    {
+                        Reload();
+                    }
                 }
                 break;
             case WeaponType.SMG:
                 if (Time.time >= nextFire)
                 {
-                    nextFire = Time.time + weaponStats.fireRate;
-                    OneShot();
+                    if (bulletsLeft > 0 && !reloading)
+                    {
+                        nextFire = Time.time + weaponStats.fireRate;
+                        OneShot();
+                    }
+                    else
+                    {
+                        Reload();
+                    }
                 }
                 break;
             case WeaponType.SHOTGUN:
                 if(Time.time >= nextFire)
                 {
-                    bulletsShot = weaponStats.bulletsPerTap;
-                    nextFire = Time.time + weaponStats.fireRate;
-                    ShotgunShot();
-                    bulletsLeft--;
+                    if(bulletsLeft > 0 && !reloading)
+                    {
+                        bulletsShot = weaponStats.bulletsPerTap;
+                        nextFire = Time.time + weaponStats.fireRate;
+                        ShotgunShot();
+                        bulletsLeft--;
+                    }
+                    else
+                    {
+                        Reload();
+                    }
                 }
                 break;
             case WeaponType.RIFLE:
                 if (Time.time >= nextFire)
                 {
-                    nextFire = Time.time + weaponStats.fireRate;
-                    OneShot();
+                    if (bulletsLeft > 0 && !reloading)
+                    {
+                        nextFire = Time.time + weaponStats.fireRate;
+                        OneShot();
+                    }
+                    else
+                    {
+                        Reload();
+                    }
                 }
                 break;
         }
@@ -64,12 +91,9 @@ public class WeaponController : MonoBehaviour
 
     private void OneShot()
     {
-        float x = Random.Range(-weaponStats.spread, weaponStats.spread);
-        float y = Random.Range(-weaponStats.spread, weaponStats.spread);
-
         GameObject bulletInstance = Instantiate(weaponStats.bullet, tipOfGun.position, tipOfGun.rotation);
         var rb = bulletInstance.GetComponent<Rigidbody>();
-        rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed + new Vector3(x, y, 0));
+        rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed);
 
         bulletsLeft--;
     }
@@ -81,13 +105,13 @@ public class WeaponController : MonoBehaviour
 
         GameObject bulletInstance = Instantiate(weaponStats.bullet, tipOfGun.position, tipOfGun.rotation);
         var rb = bulletInstance.GetComponent<Rigidbody>();
-        rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed + new Vector3(x, y, 0));
+        rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed + new Vector3(x, y, 0f));
 
         bulletsShot--;
 
         if(bulletsShot > 0)
         {
-            Invoke("ShotgunShot", 0);
+            Invoke("ShotgunShot", 0f);
         }
     }
 
@@ -101,5 +125,19 @@ public class WeaponController : MonoBehaviour
         else
             dir = ray.direction;
         return dir;
+    }
+
+    public void Reload()
+    {        
+        reloading = true;
+        Invoke("ReloadFinished", weaponStats.reloadTime);
+
+        float degreesPerSecond = 360f / weaponStats.reloadTime;
+        transform.Rotate(new Vector3(degreesPerSecond * Time.deltaTime, 0f, 0f));
+    }
+    private void ReloadFinished()
+    {
+        bulletsLeft = weaponStats.magazineSize;
+        reloading = false;
     }
 }

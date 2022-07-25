@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0.25
   magazineSize: 30
+  bulletsPerTap: 1
+  spread: 10
   reloadTime: 1
   damagePerShot: 8
   bulletSpeed: 6000

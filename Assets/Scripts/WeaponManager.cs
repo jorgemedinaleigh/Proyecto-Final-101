@@ -9,22 +9,30 @@ public class WeaponManager : MonoBehaviour
     private Camera cam;
     [SerializeField] private KeyCode pickUpKey = KeyCode.E;
     [SerializeField] private KeyCode dropKey = KeyCode.Q;
+    [SerializeField] private KeyCode reloadKey = KeyCode.R;
     [SerializeField] private GameObject weaponHolder;
 
     private void Start()
     {
         cam = Camera.main;
     }
+
     private void Update()
+    {
+        InputHandler();
+    }
+
+    private void InputHandler()
     {
         if (Input.GetKeyDown(pickUpKey) && weaponInRadius != null && currentHeldWeapon == null)
         {
             PickUpGun();
-        }            
+        }
         if (Input.GetKeyDown(dropKey) && currentHeldWeapon != null)
         {
             DropGun();
         }
+
         if (currentHeldWeapon != null && currentHeldWeapon.weaponStats.isRapid && Input.GetMouseButton(0))
         {
             currentHeldWeapon.Shoot();
@@ -33,7 +41,13 @@ public class WeaponManager : MonoBehaviour
         {
             currentHeldWeapon.Shoot();
         }
+
+        if(currentHeldWeapon != null && currentHeldWeapon.bulletsLeft < currentHeldWeapon.weaponStats.magazineSize && Input.GetKeyDown(reloadKey))
+        {
+            currentHeldWeapon.Reload();
+        }
     }
+
     private void PickUpGun()
     {
         weaponInRadius.GetComponent<Rigidbody>().isKinematic = true;
@@ -53,11 +67,13 @@ public class WeaponManager : MonoBehaviour
         rb.AddForce(cam.transform.forward * 500);
         rb.angularVelocity = cam.transform.forward * 500;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PickableGun"))
             weaponInRadius = other.gameObject;
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("PickableGun"))
