@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3733529161698005331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.202, z: 2.477}
+  m_LocalPosition: {x: 0, y: 0.202, z: 2.363}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponStats: {fileID: 11400000, guid: dc08f7cc3cff5a64b92e81802c211a76, type: 2}
+  bulletsLeft: 0
   tipOfGun: {fileID: 1579065595409346192}
 --- !u!54 &6799783482116374100
 Rigidbody:
@@ -108,8 +109,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.526178, z: 4.6269226}
-  m_Center: {x: 0, y: -0.7630888, z: 0.036382377}
+  m_Size: {x: 1, y: 2.5261781, z: 4.202653}
+  m_Center: {x: 0, y: -0.76308894, z: -0.17575309}
 --- !u!1001 &4947467179278017109
 PrefabInstance:
   m_ObjectHideFlags: 0

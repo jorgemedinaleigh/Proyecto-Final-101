@@ -24,14 +24,8 @@ public class WeaponManager : MonoBehaviour
 
     private void InputHandler()
     {
-        if (Input.GetKeyDown(pickUpKey) && weaponInRadius != null && currentHeldWeapon == null)
-        {
-            PickUpGun();
-        }
-        if (Input.GetKeyDown(dropKey) && currentHeldWeapon != null)
-        {
-            DropGun();
-        }
+        PickUpGun();
+        DropGun();
 
         if (currentHeldWeapon != null && currentHeldWeapon.weaponStats.isRapid && Input.GetMouseButton(0))
         {
@@ -50,34 +44,44 @@ public class WeaponManager : MonoBehaviour
 
     private void PickUpGun()
     {
-        weaponInRadius.GetComponent<Rigidbody>().isKinematic = true;
-        weaponInRadius.GetComponent<Collider>().enabled = false;
-        weaponInRadius.transform.SetParent(weaponHolder.transform);
-        LeanTween.moveLocal(weaponInRadius, Vector3.zero, 0.3f);
-        LeanTween.rotateLocal(weaponInRadius, Vector3.zero, 0.3f);
-        currentHeldWeapon = weaponInRadius.GetComponent<WeaponController>();
+        if (Input.GetKeyDown(pickUpKey) && weaponInRadius != null && currentHeldWeapon == null)
+        {
+            weaponInRadius.GetComponent<Rigidbody>().isKinematic = true;
+            weaponInRadius.GetComponent<Collider>().enabled = false;
+            weaponInRadius.transform.SetParent(weaponHolder.transform);
+            LeanTween.moveLocal(weaponInRadius, Vector3.zero, 0.3f);
+            LeanTween.rotateLocal(weaponInRadius, Vector3.zero, 0.3f);
+            currentHeldWeapon = weaponInRadius.GetComponent<WeaponController>();
+        }        
     }
     private void DropGun()
     {
-        weaponInRadius.transform.SetParent(null);
-        currentHeldWeapon = null;
-        var rb = weaponInRadius.GetComponent<Rigidbody>();
-        rb.isKinematic = false;
-        weaponInRadius.GetComponent<Collider>().enabled = true;
-        rb.AddForce(cam.transform.forward * 500);
-        rb.angularVelocity = cam.transform.forward * 500;
+        if (Input.GetKeyDown(dropKey) && currentHeldWeapon != null)
+        {
+            weaponInRadius.transform.SetParent(null);
+            currentHeldWeapon = null;
+            var rb = weaponInRadius.GetComponent<Rigidbody>();
+            rb.isKinematic = false;
+            weaponInRadius.GetComponent<Collider>().enabled = true;
+            rb.AddForce(cam.transform.forward * 500);
+            rb.angularVelocity = cam.transform.forward * 500;
+        }        
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("PickableGun"))
+    {        
+        if (other.CompareTag("PickableGun") && weaponInRadius == null)
+        {
             weaponInRadius = other.gameObject;
+        }            
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("PickableGun"))
+        if (other.CompareTag("PickableGun") && weaponInRadius != null)
+        {
             weaponInRadius = null;
+        }
     }
 }
 public enum WeaponType

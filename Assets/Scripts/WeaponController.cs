@@ -91,7 +91,7 @@ public class WeaponController : MonoBehaviour
 
     private void OneShot()
     {
-        GameObject bulletInstance = Instantiate(weaponStats.bullet, tipOfGun.position, tipOfGun.rotation);
+        GameObject bulletInstance = Instantiate(weaponStats.bullet, tipOfGun.position, tipOfGun.rotation.normalized * Quaternion.Euler(90f, 0f, 0f));
         var rb = bulletInstance.GetComponent<Rigidbody>();
         rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed);
 
@@ -121,23 +121,43 @@ public class WeaponController : MonoBehaviour
         RaycastHit hit;
         Vector3 dir;
         if (Physics.Raycast(ray, out hit))
+        {
             dir = (hit.point - tipOfGun.position).normalized;
+        }            
         else
+        {
             dir = ray.direction;
+        }
+            
         return dir;
     }
 
     public void Reload()
     {        
         reloading = true;
-        Invoke("ReloadFinished", weaponStats.reloadTime);
-
-        float degreesPerSecond = 360f / weaponStats.reloadTime;
-        transform.Rotate(new Vector3(degreesPerSecond * Time.deltaTime, 0f, 0f));
+        StartCoroutine(ReloadAnimation(weaponStats.reloadTime));
+        Invoke("ReloadFinished", weaponStats.reloadTime);        
     }
+
     private void ReloadFinished()
     {
         bulletsLeft = weaponStats.magazineSize;
         reloading = false;
+    }
+
+    IEnumerator ReloadAnimation(float duration)
+    {
+        float startAngle = transform.eulerAngles.x;
+        float endAngle = startAngle + 360f;
+        float time = 0f;
+
+        while(time < duration)
+        {
+            time = time + Time.deltaTime;
+            float xRotation = Mathf.Lerp(startAngle, endAngle, time / duration) % 360;
+            transform.eulerAngles = new Vector3(xRotation, transform.eulerAngles.y, transform.eulerAngles.z);
+
+            yield return null;
+        }
     }
 }
