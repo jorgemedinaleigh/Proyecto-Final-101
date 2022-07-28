@@ -7,6 +7,7 @@ public class WeaponManager : MonoBehaviour
     private GameObject weaponInRadius;
     private WeaponController currentHeldWeapon;
     private Camera cam;
+
     [SerializeField] private KeyCode pickUpKey = KeyCode.E;
     [SerializeField] private KeyCode dropKey = KeyCode.Q;
     [SerializeField] private KeyCode reloadKey = KeyCode.R;
@@ -38,7 +39,7 @@ public class WeaponManager : MonoBehaviour
 
         if(currentHeldWeapon != null && currentHeldWeapon.bulletsLeft < currentHeldWeapon.weaponStats.magazineSize && Input.GetKeyDown(reloadKey))
         {
-            currentHeldWeapon.Reload();
+            currentHeldWeapon.Reload();            
         }
     }
 

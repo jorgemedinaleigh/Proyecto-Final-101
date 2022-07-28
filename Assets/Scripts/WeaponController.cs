@@ -10,6 +10,8 @@ public class WeaponController : MonoBehaviour
     public int bulletsLeft;
     private int bulletsShot;
     private bool reloading = false;
+    private AudioSource shotSFX;
+    private AudioSource reloadSFX;
 
     [SerializeField] private Transform tipOfGun;
 
@@ -22,6 +24,7 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
+        shotSFX = GetComponent<AudioSource>();
     }
 
     public void Shoot()
@@ -35,6 +38,7 @@ public class WeaponController : MonoBehaviour
                     {
                         nextFire = Time.time + weaponStats.fireRate;
                         OneShot();
+                        shotSFX.Play();
                     }
                     else
                     {
@@ -49,6 +53,7 @@ public class WeaponController : MonoBehaviour
                     {
                         nextFire = Time.time + weaponStats.fireRate;
                         OneShot();
+                        shotSFX.Play();
                     }
                     else
                     {
@@ -65,6 +70,7 @@ public class WeaponController : MonoBehaviour
                         nextFire = Time.time + weaponStats.fireRate;
                         ShotgunShot();
                         bulletsLeft--;
+                        shotSFX.Play();
                     }
                     else
                     {
@@ -133,9 +139,11 @@ public class WeaponController : MonoBehaviour
     }
 
     public void Reload()
-    {        
+    {
         reloading = true;
+        reloadSFX = gameObject.transform.parent.GetComponent<AudioSource>();
         StartCoroutine(ReloadAnimation(weaponStats.reloadTime));
+        reloadSFX.Play();
         Invoke("ReloadFinished", weaponStats.reloadTime);        
     }
 
