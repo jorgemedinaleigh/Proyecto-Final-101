@@ -338,10 +338,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 5694930849326735971, guid: a5a7f9c205552514a90ed43b1eceb5f6, type: 3}
-  - {fileID: 4561285112282783055, guid: 02a7383323687ce4db01c4f78226326c, type: 3}
-  - {fileID: 7436166577222924703, guid: fd274df0c2ecf79478c04a9f8c697043, type: 3}
-  - {fileID: 1613376636619591335, guid: 74f4c6ef61849324ea11ce38aeadcb51, type: 3}
+  - {fileID: 2750954485343833930, guid: e6b57307029017f4c908789cef2a09f3, type: 3}
+  - {fileID: 2904714248589422532, guid: aebedeacbc006d04889a69aae5ef7e75, type: 3}
+  - {fileID: 5659468814484372265, guid: 1f30d5dbd706506458c2670264860463, type: 3}
+  - {fileID: 2060024511767327623, guid: 372cfb14ba5e3c549bb97a2ac4f9085d, type: 3}
   waveNumber: 1
   waitToSpawn: 2
 --- !u!1 &4911996462450828319
