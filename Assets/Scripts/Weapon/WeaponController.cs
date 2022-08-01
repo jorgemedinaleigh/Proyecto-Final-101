@@ -160,6 +160,8 @@ public class WeaponController : MonoBehaviour
         float endAngle = startAngle + 360f;
         float time = 0f;
 
+        Quaternion initialRotation = transform.rotation;
+
         while(time < duration)
         {
             time = time + Time.deltaTime;
@@ -168,5 +170,7 @@ public class WeaponController : MonoBehaviour
 
             yield return null;
         }
+
+        transform.rotation = initialRotation;
     }
 }

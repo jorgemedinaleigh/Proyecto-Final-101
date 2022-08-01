@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,6 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] EnemyStats enemyStats;
     [SerializeField] float reaction;
+    [SerializeField] private Animator animController;
 
     private NavMeshAgent agent;
     private GameObject player;
@@ -16,10 +19,17 @@ public class EnemyController : MonoBehaviour
         player = GameObject.Find("Player");
 
         SetEnemyStats();
+        
+        animController.SetBool("IsAlive", true);
     }
 
     void Update()
     {
+        if (player == null)
+        {   // early return
+            return;
+        }
+
         Vector3 playerPosition = (player.transform.position - transform.position);
         PersuePlayer(playerPosition);
     }
@@ -27,6 +37,7 @@ public class EnemyController : MonoBehaviour
     public void PersuePlayer(Vector3 playerPosition)
     {
         agent.destination = playerPosition;
+        animController.SetFloat("Speed", agent.speed);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -36,11 +47,27 @@ public class EnemyController : MonoBehaviour
             currentEnemyHP = currentEnemyHP - collision.gameObject.GetComponent<BulletController>().bulletDamage;
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z - reaction);
 
+            animController.SetTrigger("Hit");
+            
             if(currentEnemyHP <= 0)
             {
-                Destroy(gameObject, 0.5f);
+                animController.SetBool("IsAlive", false);
             }
+
+            StartCoroutine(WaitForDeadAnimation());
         }
+    }
+
+    IEnumerator WaitForDeadAnimation()
+    {
+        while (!animController.GetCurrentAnimatorStateInfo(0).IsName("Dead"))
+        {   // esperar hasta que este en este estado
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(animController.GetCurrentAnimatorStateInfo(0).length);
+
+        Destroy(gameObject, 0.5f);
     }
 
     public void AttackPlayer()
