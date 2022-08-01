@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,7 +14,8 @@ public class EnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
-        currentEnemyHP = enemyStats.healthPoints;
+
+        SetEnemyStats();
     }
 
     void Update()
@@ -35,7 +34,8 @@ public class EnemyController : MonoBehaviour
         if(collision.gameObject.CompareTag("Bullet"))
         {
             currentEnemyHP = currentEnemyHP - collision.gameObject.GetComponent<BulletController>().bulletDamage;
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - reaction);
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z - reaction);
+
             if(currentEnemyHP <= 0)
             {
                 Destroy(gameObject, 0.5f);
@@ -56,7 +56,14 @@ public class EnemyController : MonoBehaviour
             case EnemyType.GUNNER:
                 break;
         }        
-    }    
+    }  
+    
+    void SetEnemyStats()
+    {
+        currentEnemyHP = enemyStats.healthPoints;
+        agent.speed = enemyStats.movementSpeed;
+        agent.stoppingDistance = enemyStats.rangeToAttack;
+    }
 }
 
 public enum EnemyType

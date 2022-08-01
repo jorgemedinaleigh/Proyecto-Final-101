@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ade160c44558f14185f6b70368317c0, type: 3}
   m_Name: Gunner
   m_EditorClassIdentifier: 
-  healthPoints: 0
-  rangeToAttack: 0
-  damagePerAttack: 0
-  movementSpeed: 0
+  healthPoints: 20
+  rangeToAttack: 5
+  damagePerAttack: 15
+  movementSpeed: 4
   bulletSpeed: 0
   bullet: {fileID: 0}
   enemyType: 2

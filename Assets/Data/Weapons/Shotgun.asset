@@ -17,7 +17,7 @@ MonoBehaviour:
   bulletsPerTap: 10
   spread: 120
   reloadTime: 3
-  damagePerShot: 50
+  damagePerShot: 5
   bulletSpeed: 2500
   bullet: {fileID: 7092348273409560255, guid: ae324db9106e8c040a12dfa7bf8e375e, type: 3}
   isRapid: 0

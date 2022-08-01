@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ade160c44558f14185f6b70368317c0, type: 3}
   m_Name: Melee
   m_EditorClassIdentifier: 
-  healthPoints: 0
-  rangeToAttack: 0
-  damagePerAttack: 0
-  movementSpeed: 0
+  healthPoints: 30
+  rangeToAttack: 0.2
+  damagePerAttack: 30
+  movementSpeed: 5
   bulletSpeed: 0
   bullet: {fileID: 0}
   enemyType: 1
