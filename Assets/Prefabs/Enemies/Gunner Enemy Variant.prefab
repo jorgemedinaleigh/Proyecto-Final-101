@@ -55,7 +55,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunner Enemy Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4661517758670744804, guid: c6c097bc161433945a58e47f48a9bf2c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c6c097bc161433945a58e47f48a9bf2c, type: 3}
 --- !u!1 &5659468814484372265 stripped
 GameObject:
@@ -88,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: 3b84ea92af9a03c4c86664b80784dda5, type: 2}
+  reaction: 0.5
 --- !u!195 &3469521630896514902
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -104,7 +106,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1.5
   m_BaseOffset: 0

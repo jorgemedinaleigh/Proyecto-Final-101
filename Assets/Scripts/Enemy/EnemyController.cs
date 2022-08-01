@@ -5,27 +5,42 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    public EnemyStats enemyStats;
+    [SerializeField] EnemyStats enemyStats;
+    [SerializeField] float reaction;
 
     private NavMeshAgent agent;
     private GameObject player;
+    private float currentEnemyHP;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
+        currentEnemyHP = enemyStats.healthPoints;
     }
 
     void Update()
     {
-        Vector3 playerPosition = (player.transform.position - transform.position).normalized;
+        Vector3 playerPosition = (player.transform.position - transform.position);
         PersuePlayer(playerPosition);
     }
 
     public void PersuePlayer(Vector3 playerPosition)
-    {        
-        transform.LookAt(playerPosition);
+    {
         agent.destination = playerPosition;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Bullet"))
+        {
+            currentEnemyHP = currentEnemyHP - collision.gameObject.GetComponent<BulletController>().bulletDamage;
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - reaction);
+            if(currentEnemyHP <= 0)
+            {
+                Destroy(gameObject, 0.5f);
+            }
+        }
     }
 
     public void AttackPlayer()
@@ -42,4 +57,12 @@ public class EnemyController : MonoBehaviour
                 break;
         }        
     }    
+}
+
+public enum EnemyType
+{
+    KAMIKAZE,
+    MELEE,
+    GUNNER,
+    SNIPER
 }

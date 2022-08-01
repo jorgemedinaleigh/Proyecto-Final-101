@@ -130,8 +130,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6363491, y: 1.1496333, z: 0.6516306}
-  m_Center: {x: -0.020411968, y: 0.8749233, z: 0.17418471}
+  m_Size: {x: 0.8855864, y: 1.2982794, z: 0.6516306}
+  m_Center: {x: -0.054134786, y: 0.8770037, z: 0.17418471}
 --- !u!114 &2400821303538309278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: e649ab925ba8f20419e72a442acaef63, type: 2}
+  reaction: 0.2
 --- !u!195 &6416089532212334102
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1.5
   m_BaseOffset: 0

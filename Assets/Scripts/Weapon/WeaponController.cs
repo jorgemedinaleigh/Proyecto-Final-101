@@ -99,6 +99,7 @@ public class WeaponController : MonoBehaviour
     {
         GameObject bulletInstance = Instantiate(weaponStats.bullet, tipOfGun.position, tipOfGun.rotation.normalized * Quaternion.Euler(90f, 0f, 0f));
         var rb = bulletInstance.GetComponent<Rigidbody>();
+        bulletInstance.GetComponent<BulletController>().bulletDamage = weaponStats.damagePerShot;
         rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed);
 
         bulletsLeft--;
@@ -111,6 +112,7 @@ public class WeaponController : MonoBehaviour
 
         GameObject bulletInstance = Instantiate(weaponStats.bullet, tipOfGun.position, tipOfGun.rotation);
         var rb = bulletInstance.GetComponent<Rigidbody>();
+        bulletInstance.GetComponent<BulletController>().bulletDamage = weaponStats.damagePerShot;
         rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed + new Vector3(x, y, 0f));
 
         bulletsShot--;

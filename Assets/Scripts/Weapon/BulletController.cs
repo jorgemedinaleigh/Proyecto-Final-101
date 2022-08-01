@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     [SerializeField] GameObject hitEffect;
+    public float bulletDamage = 0;
 
     private void OnCollisionEnter(Collision collision)
     {

@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: 541fccced487ff44682d2d2cd9db0b45, type: 2}
+  reaction: 0.1
 --- !u!195 &-105394775115860071
 NavMeshAgent:
   m_ObjectHideFlags: 0
