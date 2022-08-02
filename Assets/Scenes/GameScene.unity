@@ -1775,6 +1775,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Tunnel
       objectReference: {fileID: 0}
+    - target: {fileID: 7158083414096587113, guid: bb4b5f61505b49443824f725ab678f86, type: 3}
+      propertyPath: enemies.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158083414096587113, guid: bb4b5f61505b49443824f725ab678f86, type: 3}
+      propertyPath: enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 2904714248589422532, guid: aebedeacbc006d04889a69aae5ef7e75, type: 3}
+    - target: {fileID: 7158083414096587113, guid: bb4b5f61505b49443824f725ab678f86, type: 3}
+      propertyPath: enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 5659468814484372265, guid: 1f30d5dbd706506458c2670264860463, type: 3}
+    - target: {fileID: 7158083414096587113, guid: bb4b5f61505b49443824f725ab678f86, type: 3}
+      propertyPath: enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 2060024511767327623, guid: 372cfb14ba5e3c549bb97a2ac4f9085d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4b5f61505b49443824f725ab678f86, type: 3}
 --- !u!1 &200936033 stripped
@@ -4485,20 +4501,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ffce8e704dfd3a34aae17db8ba700ff2, type: 3}
   m_PrefabInstance: {fileID: 1297045523}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &498072188
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498072186}
-  m_Material: {fileID: 13400000, guid: 66247f51833c24b408a6e2200364aa97, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7936285630572366884, guid: ffce8e704dfd3a34aae17db8ba700ff2, type: 3}
 --- !u!64 &498072189
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17891,6 +17893,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Tunnel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7158083414096587113, guid: bb4b5f61505b49443824f725ab678f86, type: 3}
+      propertyPath: enemies.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158083414096587113, guid: bb4b5f61505b49443824f725ab678f86, type: 3}
+      propertyPath: enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 2904714248589422532, guid: aebedeacbc006d04889a69aae5ef7e75, type: 3}
+    - target: {fileID: 7158083414096587113, guid: bb4b5f61505b49443824f725ab678f86, type: 3}
+      propertyPath: enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 5659468814484372265, guid: 1f30d5dbd706506458c2670264860463, type: 3}
+    - target: {fileID: 7158083414096587113, guid: bb4b5f61505b49443824f725ab678f86, type: 3}
+      propertyPath: enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 2060024511767327623, guid: 372cfb14ba5e3c549bb97a2ac4f9085d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4b5f61505b49443824f725ab678f86, type: 3}
 --- !u!1 &1934331615 stripped

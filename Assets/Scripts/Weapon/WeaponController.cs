@@ -160,7 +160,7 @@ public class WeaponController : MonoBehaviour
         float endAngle = startAngle + 360f;
         float time = 0f;
 
-        Quaternion initialRotation = transform.rotation;
+        Quaternion initialRotation = Quaternion.identity;
 
         while(time < duration)
         {
