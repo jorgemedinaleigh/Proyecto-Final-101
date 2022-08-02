@@ -57,6 +57,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57b9e521c310d27419badbe71bd48f50, type: 3}
+--- !u!1 &9003195958472774638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 57b9e521c310d27419badbe71bd48f50, type: 3}
+  m_PrefabInstance: {fileID: 8084153556955672255}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3711103707302454592
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9003195958472774638}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e77e695ce50a00c408a7a89e4ff7f522, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8279182853473060765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: e649ab925ba8f20419e72a442acaef63, type: 2}
   reaction: 0.2
+  animController: {fileID: 0}
 --- !u!195 &6416089532212334102
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Kamikaze
   m_EditorClassIdentifier: 
   healthPoints: 15
-  rangeToAttack: 0.5
+  rangeToAttack: 2
   damagePerAttack: 70
-  movementSpeed: 3
+  movementSpeed: 1
   bulletSpeed: 0
   bullet: {fileID: 0}
   enemyType: 0

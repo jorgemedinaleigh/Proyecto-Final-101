@@ -15,7 +15,7 @@ MonoBehaviour:
   healthPoints: 20
   rangeToAttack: 5
   damagePerAttack: 15
-  movementSpeed: 4
+  movementSpeed: 2
   bulletSpeed: 0
   bullet: {fileID: 0}
   enemyType: 2

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Melee
   m_EditorClassIdentifier: 
   healthPoints: 30
-  rangeToAttack: 0.2
+  rangeToAttack: 2
   damagePerAttack: 30
-  movementSpeed: 5
+  movementSpeed: 3
   bulletSpeed: 0
   bullet: {fileID: 0}
   enemyType: 1

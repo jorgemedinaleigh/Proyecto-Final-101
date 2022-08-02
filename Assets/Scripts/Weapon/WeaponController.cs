@@ -100,6 +100,7 @@ public class WeaponController : MonoBehaviour
         var rb = bulletInstance.GetComponent<Rigidbody>();
         bulletInstance.GetComponent<BulletController>().bulletDamage = weaponStats.damagePerShot;
         rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed);
+        GetComponent<Animator>().SetTrigger("Shoot");
 
         bulletsLeft--;
     }
@@ -113,6 +114,7 @@ public class WeaponController : MonoBehaviour
         var rb = bulletInstance.GetComponent<Rigidbody>();
         bulletInstance.GetComponent<BulletController>().bulletDamage = weaponStats.damagePerShot;
         rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed + new Vector3(x, y, 0f));
+        GetComponent<Animator>().SetTrigger("Shoot");
 
         bulletsShot--;
 
@@ -143,7 +145,7 @@ public class WeaponController : MonoBehaviour
     {
         reloading = true;
         reloadSFX = gameObject.transform.parent.GetComponent<AudioSource>();
-        StartCoroutine(ReloadAnimation(weaponStats.reloadTime));
+        GetComponent<Animator>().SetTrigger("Reload");
         reloadSFX.Play();
         Invoke("ReloadFinished", weaponStats.reloadTime);        
     }
@@ -152,25 +154,5 @@ public class WeaponController : MonoBehaviour
     {
         bulletsLeft = weaponStats.magazineSize;
         reloading = false;
-    }
-
-    IEnumerator ReloadAnimation(float duration)
-    {
-        float startAngle = transform.eulerAngles.x;
-        float endAngle = startAngle + 360f;
-        float time = 0f;
-
-        Quaternion initialRotation = Quaternion.identity;
-
-        while(time < duration)
-        {
-            time = time + Time.deltaTime;
-            float xRotation = Mathf.Lerp(startAngle, endAngle, time / duration) % 360;
-            transform.eulerAngles = new Vector3(xRotation, transform.eulerAngles.y, transform.eulerAngles.z);
-
-            yield return null;
-        }
-
-        transform.rotation = initialRotation;
     }
 }

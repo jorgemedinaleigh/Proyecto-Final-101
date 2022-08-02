@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 6799783482116374100}
   - component: {fileID: 4848626734879897918}
   - component: {fileID: 8160035131805613142}
+  - component: {fileID: 676002025}
   m_Layer: 0
   m_Name: SMG
   m_TagString: PickableGun
@@ -208,6 +209,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &676002025
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8960455459627431443}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8eb45f95145538d4fa2e27240db95505, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4947467179278017109
 PrefabInstance:
   m_ObjectHideFlags: 0

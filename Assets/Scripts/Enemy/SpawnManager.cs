@@ -3,39 +3,33 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] enemies;
     [SerializeField] int waveNumber = 1;
-    [SerializeField] float waitToSpawn = 2f;
+    [SerializeField] GameObject[] spawnTunnels;
 
     public static int enemiesCount = 0;
 
     void Start()
     {
-        StartCoroutine(SpawnEnemyWave());
+        
     }
 
     void Update()
     {
-        SpawnNextWave();
+        SpawnWave();
+        Debug.Log(enemiesCount);
     }
 
-    IEnumerator SpawnEnemyWave()
-    {
-        for (int i = 0; i < waveNumber; i++)
-        {
-            Instantiate(enemies[i % 4], transform.position, transform.rotation);
-            enemiesCount++;
-
-            yield return new WaitForSeconds(waitToSpawn);
-        }
-    }
-
-    void SpawnNextWave()
+    void SpawnWave()
     {
         if(enemiesCount == 0)
         {
+            Debug.Log(waveNumber);
+            for (int i = 0; i < spawnTunnels.Length; i++)
+            {
+                var spawnTunnel = spawnTunnels[i].GetComponent<SpawnTunnelController>();
+                spawnTunnel.SpawnNextWave(waveNumber);
+            }
             waveNumber++;
-            StartCoroutine(SpawnEnemyWave());
         }
     }
 }

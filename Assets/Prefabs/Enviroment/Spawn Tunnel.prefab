@@ -291,7 +291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3730545687130279553}
-  - component: {fileID: 7158083414096587113}
+  - component: {fileID: -1830393951408863601}
   m_Layer: 8
   m_Name: Spawn Tunnel
   m_TagString: Untagged
@@ -325,7 +325,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7158083414096587113
+--- !u!114 &-1830393951408863601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3730545687130279554}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 139e86f1452cb7243af8947c585d9abe, type: 3}
+  m_Script: {fileID: 11500000, guid: bd1c1751e7a72e04394e86a4d5116414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
@@ -342,7 +342,6 @@ MonoBehaviour:
   - {fileID: 2904714248589422532, guid: aebedeacbc006d04889a69aae5ef7e75, type: 3}
   - {fileID: 5659468814484372265, guid: 1f30d5dbd706506458c2670264860463, type: 3}
   - {fileID: 2060024511767327623, guid: 372cfb14ba5e3c549bb97a2ac4f9085d, type: 3}
-  waveNumber: 1
   waitToSpawn: 2
 --- !u!1 &4911996462450828319
 GameObject:

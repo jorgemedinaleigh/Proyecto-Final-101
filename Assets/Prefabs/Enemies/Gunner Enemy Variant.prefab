@@ -90,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: 3b84ea92af9a03c4c86664b80784dda5, type: 2}
   reaction: 0.5
+  animController: {fileID: 0}
 --- !u!195 &3469521630896514902
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -186,3 +187,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 252cc9746d567dc4ea12c0d33c9c1f67, type: 3}
+--- !u!1 &7634697825213587033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 252cc9746d567dc4ea12c0d33c9c1f67, type: 3}
+  m_PrefabInstance: {fileID: 7292045680552485640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2449157944378743315
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7634697825213587033}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 39fdea268d9c8724c8936666ceffd28c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

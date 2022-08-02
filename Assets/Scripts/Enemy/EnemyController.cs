@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] EnemyStats enemyStats;
-    [SerializeField] float reaction;
-    [SerializeField] private Animator animController;
+    [SerializeField] Animator animController;
 
     private NavMeshAgent agent;
     private GameObject player;
@@ -33,8 +31,13 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        Vector3 playerPosition = (player.transform.position - transform.position);
+        Vector3 playerPosition = player.transform.position;
         PersuePlayer(playerPosition);
+
+        if(enemyStats.rangeToAttack >= Vector3.Distance(transform.position, playerPosition))
+        {
+            AttackPlayer();
+        }
     }
 
     public void PersuePlayer(Vector3 playerPosition)
@@ -51,16 +54,15 @@ public class EnemyController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
-            currentEnemyHP = currentEnemyHP - collision.gameObject.GetComponent<BulletController>().bulletDamage;
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z - reaction);
+            currentEnemyHP = Mathf.Clamp(currentEnemyHP - collision.gameObject.GetComponent<BulletController>().bulletDamage, 0f, enemyStats.healthPoints);
 
             if (animController != null)
             {
                 animController.SetTrigger("Hit");
             }
-
-            if(currentEnemyHP <= 0)
+            if(currentEnemyHP == 0)
             {
+                agent.speed = 0;
                 StartCoroutine(SetAndWaitForDeathAnimation());
             }
         }
@@ -86,7 +88,15 @@ public class EnemyController : MonoBehaviour
 
     public void AttackPlayer()
     {
-        switch(enemyStats.enemyType)
+        animController.SetFloat("Speed", 0);
+        agent.speed = 0;
+
+        if (animController != null)
+        {
+            animController.SetTrigger("Attack");
+        }
+
+        switch (enemyStats.enemyType)
         {
             case EnemyType.MELEE:
                 break;
@@ -96,7 +106,10 @@ public class EnemyController : MonoBehaviour
                 break;
             case EnemyType.GUNNER:
                 break;
-        }        
+        }
+
+        agent.speed = enemyStats.movementSpeed;
+        animController.SetFloat("Speed", agent.speed);
     }  
     
     void SetEnemyStats()
