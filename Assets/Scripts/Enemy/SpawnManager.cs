@@ -7,6 +7,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] int waveNumber = 1;
     [SerializeField] float waitToSpawn = 2f;
 
+    public static int enemiesCount = 0;
+
     void Start()
     {
         StartCoroutine(SpawnEnemyWave());
@@ -22,6 +24,7 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < waveNumber; i++)
         {
             Instantiate(enemies[i % 4], transform.position, transform.rotation);
+            enemiesCount++;
 
             yield return new WaitForSeconds(waitToSpawn);
         }
@@ -29,7 +32,7 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnNextWave()
     {
-        if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        if(enemiesCount == 0)
         {
             waveNumber++;
             StartCoroutine(SpawnEnemyWave());
