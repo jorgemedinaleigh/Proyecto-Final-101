@@ -15,7 +15,7 @@ MonoBehaviour:
   fireRate: 0.8
   magazineSize: 2
   bulletsPerTap: 10
-  spread: 120
+  spread: 200
   reloadTime: 3
   damagePerShot: 5
   bulletSpeed: 2500

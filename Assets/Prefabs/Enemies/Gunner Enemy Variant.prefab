@@ -89,8 +89,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: 3b84ea92af9a03c4c86664b80784dda5, type: 2}
-  reaction: 0.5
-  animController: {fileID: 0}
+  animController: {fileID: 2449157944378743315}
+  hitParticles: {fileID: 0}
+  explosionEffect: {fileID: 0}
+  blastRadius: 0
+  blastForce: 0
 --- !u!195 &3469521630896514902
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -202,7 +205,7 @@ Animator:
   m_GameObject: {fileID: 7634697825213587033}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 39fdea268d9c8724c8936666ceffd28c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2786bafb41ebc8343b9de103d0d05690, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

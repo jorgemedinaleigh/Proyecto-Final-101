@@ -13,6 +13,7 @@ public class WeaponController : MonoBehaviour
     private AudioSource reloadSFX;
 
     [SerializeField] private Transform tipOfGun;
+    [SerializeField] private GameObject muzzleFlash;
 
     private void Awake()
     {
@@ -101,6 +102,8 @@ public class WeaponController : MonoBehaviour
         bulletInstance.GetComponent<BulletController>().bulletDamage = weaponStats.damagePerShot;
         rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed);
         GetComponent<Animator>().SetTrigger("Shoot");
+        GameObject hitInstance = Instantiate(muzzleFlash, tipOfGun.position, tipOfGun.rotation);
+        Destroy(hitInstance, hitInstance.GetComponent<ParticleSystem>().main.startLifetimeMultiplier);
 
         bulletsLeft--;
     }
@@ -115,6 +118,8 @@ public class WeaponController : MonoBehaviour
         bulletInstance.GetComponent<BulletController>().bulletDamage = weaponStats.damagePerShot;
         rb.AddForce(CalculateDirection() * weaponStats.bulletSpeed + new Vector3(x, y, 0f));
         GetComponent<Animator>().SetTrigger("Shoot");
+        GameObject hitInstance = Instantiate(muzzleFlash, tipOfGun.position, tipOfGun.rotation);
+        Destroy(hitInstance, hitInstance.GetComponent<ParticleSystem>().main.startLifetimeMultiplier);
 
         bulletsShot--;
 

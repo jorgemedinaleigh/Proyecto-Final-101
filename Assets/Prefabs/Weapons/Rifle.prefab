@@ -80,7 +80,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponStats: {fileID: 11400000, guid: 774bbed4f1f091c418f220f01976392f, type: 2}
+  bulletsLeft: 0
   tipOfGun: {fileID: 8834395469591435497}
+  muzzleFlash: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
 --- !u!54 &5303254041665850019
 Rigidbody:
   m_ObjectHideFlags: 0

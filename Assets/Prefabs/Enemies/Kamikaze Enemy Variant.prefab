@@ -144,6 +144,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6533050464076064857, guid: c6c097bc161433945a58e47f48a9bf2c, type: 3}
   m_PrefabInstance: {fileID: 8973233484845524755}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &8140888851843901633
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750954485343833930}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.84999406, z: 1.0662444}
+  m_Center: {x: 0, y: 0.79978544, z: 0.0915539}
 --- !u!114 &-3941591000272220285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +171,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: 541fccced487ff44682d2d2cd9db0b45, type: 2}
   animController: {fileID: 8526961843831310038}
+  hitParticles: {fileID: 1892351807075712, guid: 44be68b4fc4366142a9cd1ae1f761ea4, type: 3}
+  explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
+  blastRadius: 10
+  blastForce: 10
 --- !u!195 &-105394775115860071
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -180,19 +197,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &8140888851843901633
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2750954485343833930}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.84999406, z: 1.0662444}
-  m_Center: {x: 0, y: 0.79978544, z: 0.0915539}
 --- !u!4 &4228923525299710973 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5059639999357750510, guid: c6c097bc161433945a58e47f48a9bf2c, type: 3}

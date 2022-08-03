@@ -6,6 +6,9 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] EnemyStats enemyStats;
     [SerializeField] Animator animController;
+    [SerializeField] GameObject explosionEffect;
+    [SerializeField] float blastRadius;
+    [SerializeField] float blastForce;
 
     private NavMeshAgent agent;
     private GameObject player;
@@ -58,7 +61,7 @@ public class EnemyController : MonoBehaviour
 
             if (animController != null)
             {
-                animController.SetTrigger("Hit");
+                animController.SetTrigger("Hit");                
             }
             if(currentEnemyHP < 0)
             {
@@ -80,7 +83,7 @@ public class EnemyController : MonoBehaviour
             animController.SetBool("IsAlive", false);
             
             while (!animController.GetCurrentAnimatorStateInfo(0).IsName("Dead"))
-            {   // esperar hasta que este en este estado
+            {   //Wait until the enemy is in the Dead state
                 yield return null;
             }
             
@@ -91,30 +94,50 @@ public class EnemyController : MonoBehaviour
         SpawnManager.enemiesCount--;
     }
 
+    IEnumerator WaitForAttackAnimation()
+    {
+        if (animController != null)
+        {
+            animController.SetTrigger("Attack");
+
+            while (!animController.GetCurrentAnimatorStateInfo(0).IsName("Dead"))
+            {   //Wait until the enemy is in the Attack state
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(animController.GetCurrentAnimatorStateInfo(0).length);
+        }
+    }
+
     public void AttackPlayer()
     {
         animController.SetFloat("Speed", 0);
         agent.speed = 0;
-
-        if (animController != null)
-        {
-            animController.SetTrigger("Attack");
-        }
+        StartCoroutine(WaitForAttackAnimation());
 
         switch (enemyStats.enemyType)
         {
             case EnemyType.MELEE:
                 break;
             case EnemyType.KAMIKAZE:
+                Collider[] colliders = Physics.OverlapSphere(transform.position, blastRadius);
+                foreach(Collider nearbyObject in colliders)
+                {
+                    Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.AddExplosionForce(blastForce, transform.position, blastRadius);
+                    }
+                }
                 break;
             case EnemyType.SNIPER:
                 break;
             case EnemyType.GUNNER:
                 break;
         }
-        
+
+        animController.SetFloat("Speed", enemyStats.movementSpeed);
         agent.speed = enemyStats.movementSpeed;
-        animController.SetFloat("Speed", agent.speed);
     }  
     
     void SetEnemyStats()
