@@ -31,5 +31,17 @@ public class SpawnManager : MonoBehaviour
             }
             waveNumber++;
         }
+        else if(enemiesCount < 0)
+        {
+            CheckEnemyCount();
+        }
+    }
+
+    void CheckEnemyCount()
+    {
+        if(FindObjectsOfType<EnemyController>().Length >= 0)
+        {
+            enemiesCount = FindObjectsOfType<EnemyController>().Length;
+        }
     }
 }

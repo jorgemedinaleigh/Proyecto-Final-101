@@ -54,15 +54,20 @@ public class EnemyController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
-            currentEnemyHP = Mathf.Clamp(currentEnemyHP - collision.gameObject.GetComponent<BulletController>().bulletDamage, 0f, enemyStats.healthPoints);
+            currentEnemyHP = currentEnemyHP - collision.gameObject.GetComponent<BulletController>().bulletDamage;
 
             if (animController != null)
             {
                 animController.SetTrigger("Hit");
             }
+            if(currentEnemyHP < 0)
+            {
+                currentEnemyHP = 0;
+            }
             if(currentEnemyHP == 0)
             {
                 agent.speed = 0;
+                GetComponent<Collider>().enabled = false;
                 StartCoroutine(SetAndWaitForDeathAnimation());
             }
         }
@@ -107,7 +112,7 @@ public class EnemyController : MonoBehaviour
             case EnemyType.GUNNER:
                 break;
         }
-
+        
         agent.speed = enemyStats.movementSpeed;
         animController.SetFloat("Speed", agent.speed);
     }  
