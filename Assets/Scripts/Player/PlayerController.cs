@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +6,8 @@ public class PlayerController : MonoBehaviour
     //Assingables
     [SerializeField] Transform playerCam;
     [SerializeField] Transform orientation;
+    [SerializeField] public float playerHP;
+    [SerializeField] public float playerArmor;
 
     //Other
     private Rigidbody rb;

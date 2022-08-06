@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
     public static bool isPaused = false;
 
     [SerializeField] GameObject pauseMenuUI;
-    [SerializeField] GameObject crosshair;
+    [SerializeField] GameObject gameUI;
 
     void Update()
     {
@@ -18,7 +18,7 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         pauseMenuUI.SetActive(true);
-        crosshair.SetActive(false);
+        gameUI.SetActive(false);
         Time.timeScale = 0f;
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        crosshair.SetActive(true);
+        gameUI.SetActive(true);
         Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] int waveNumber = 1;
+    [SerializeField] public int waveNumber = 1;
     [SerializeField] GameObject[] spawnTunnels;
 
     public static int enemiesCount = 0;
@@ -29,7 +29,7 @@ public class SpawnManager : MonoBehaviour
         else if(enemiesCount < 0)
         {
             CheckEnemyCount();
-        }
+        }        
     }
 
     void CheckEnemyCount()
