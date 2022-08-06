@@ -8,11 +8,6 @@ public class SpawnManager : MonoBehaviour
 
     public static int enemiesCount = 0;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         SpawnWave();

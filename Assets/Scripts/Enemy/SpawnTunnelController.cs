@@ -7,16 +7,6 @@ public class SpawnTunnelController : MonoBehaviour
     [SerializeField] GameObject[] enemies;
     [SerializeField] float waitToSpawn = 2f;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     IEnumerator SpawnEnemyWave(int waveNumber)
     {
         for (int i = 0; i < waveNumber; i++)
