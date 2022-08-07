@@ -40,7 +40,7 @@ public class UIController : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         float milliseconds = (timeToDisplay % 1) * 1000;
 
-        timerText.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
+        timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
     }
 
     void DisplayEnemyWave()
@@ -51,8 +51,8 @@ public class UIController : MonoBehaviour
 
     void DisplayPlayerStats()
     {
-        playerHP = player.GetComponent<PlayerController>().playerHP;
-        playerArmor = player.GetComponent<PlayerController>().playerArmor;
+        playerHP = player.GetComponent<PlayerStatsController>().playerHP;
+        playerArmor = player.GetComponent<PlayerStatsController>().playerArmor;
         playerHPText.text = playerHP.ToString();
         playerArmorText.text = playerArmor.ToString();
     }

@@ -8,10 +8,14 @@ public class SpawnManager : MonoBehaviour
 
     public static int enemiesCount = 0;
 
+    void Start()
+    {
+        waveNumber = 1;    
+    }
+
     void Update()
     {
         SpawnWave();
-        Debug.Log(enemiesCount);
     }
 
     void SpawnWave()

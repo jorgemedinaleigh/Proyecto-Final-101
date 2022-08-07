@@ -8,6 +8,9 @@ TagManager:
   - PickableGun
   - Bullet
   - Lava
+  - Armor
+  - Medkit
+  - Ammo
   layers:
   - Default
   - TransparentFX

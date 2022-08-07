@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 5051787568908829226}
   - component: {fileID: 8193267707706379663}
   - component: {fileID: 6219650150799014213}
+  - component: {fileID: 81573521072090352}
+  - component: {fileID: 3646132287248369594}
   m_Layer: 0
   m_Name: S_Armor
-  m_TagString: Untagged
+  m_TagString: Armor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5571056831334963344}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -15, y: 1.3, z: 3.5}
-  m_LocalScale: {x: 100, y: 99.99999, z: 99.99999}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 200, y: 200, z: 200}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &8193267707706379663
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -83,3 +85,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &81573521072090352
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571056831334963344}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0019448297, y: 0.004528925, z: 0.0035398144}
+  m_Center: {x: 0.00013118816, y: -3.4924605e-10, z: -0.00031801054}
+--- !u!114 &3646132287248369594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571056831334963344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77bb966c1db2ef47b4f6cf2de52aa6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpStats: {fileID: 11400000, guid: 13b9f251081d582469c7ad9f01b3b46d, type: 2}
+  degreesPerSecond: 90
+  pointsToAdd: 0
+  pickUpType: 
