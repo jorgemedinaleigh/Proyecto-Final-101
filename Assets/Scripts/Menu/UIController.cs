@@ -12,13 +12,13 @@ public class UIController : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerArmorText;
     [SerializeField] TextMeshProUGUI weaponAmmoText;
 
-    float timer;
+    public float timer;
+    public float enemyWave;
     float playerHP;
     float playerArmor;
     float weaponAmmo;
     float ammoLeft;
-    float enemyWave;
-
+    
     void Start()
     {
         timer = 0;

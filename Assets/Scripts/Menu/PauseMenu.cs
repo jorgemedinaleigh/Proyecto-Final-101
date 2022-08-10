@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,10 +8,18 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] GameObject gameUI;
+    [SerializeField] GameObject deathMenuUI;
+    [SerializeField] GameObject player;
+    [SerializeField] TextMeshProUGUI finalWaveText;
+    [SerializeField] TextMeshProUGUI timeSurvivedText;
+
+    float finalWave;
+    float timeSurvived;
 
     void Update()
     {
         CheckEscapeKey();
+        PlayerDeath();
     }
 
     void Pause()
@@ -56,6 +63,12 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void PlayAgain()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(1);
+    }
+
     public void Options()
     {
 
@@ -65,5 +78,23 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Quit button pressed!");
         Application.Quit();
+    }
+
+    public void PlayerDeath()
+    {
+        if(player.GetComponent<PlayerStatsController>().isDead)
+        {
+            Time.timeScale = 0f;
+            deathMenuUI.SetActive(true);
+            gameUI.SetActive(false);
+            isPaused = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            finalWave = gameObject.GetComponentInParent<UIController>().enemyWave - 1f;
+            finalWaveText.text = "Waves Overcome: " + finalWave.ToString();
+            timeSurvived = gameObject.GetComponentInParent<UIController>().timer;
+            timeSurvivedText.text = "Time Survived: " + timeSurvived.ToString();
+        }
     }
 }
