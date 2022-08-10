@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
+        if(player == null)
         {   // early return
             return;
         }
@@ -47,7 +47,7 @@ public class EnemyController : MonoBehaviour
     {
         agent.destination = playerPosition;
 
-        if (animController != null)
+        if(animController != null)
         {
             animController.SetFloat("Speed", agent.speed);
         }
@@ -61,7 +61,7 @@ public class EnemyController : MonoBehaviour
 
             if (animController != null)
             {
-                animController.SetTrigger("Hit");                
+                StartCoroutine(WaitForHitAnimation());               
             }
             if(currentEnemyHP < 0)
             {
@@ -70,7 +70,7 @@ public class EnemyController : MonoBehaviour
             if(currentEnemyHP == 0)
             {
                 agent.speed = 0;
-                GetComponent<Collider>().enabled = false;
+                GetComponent<BoxCollider>().enabled = false;
                 StartCoroutine(SetAndWaitForDeathAnimation());
             }
         }
@@ -100,8 +100,23 @@ public class EnemyController : MonoBehaviour
         {
             animController.SetTrigger("Attack");
 
-            while (!animController.GetCurrentAnimatorStateInfo(0).IsName("Dead"))
+            while (!animController.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             {   //Wait until the enemy is in the Attack state
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(animController.GetCurrentAnimatorStateInfo(0).length);
+        }
+    }
+
+    IEnumerator WaitForHitAnimation()
+    {
+        if(animController != null)
+        {
+            animController.SetTrigger("Hit");
+
+            while(!animController.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+            {
                 yield return null;
             }
 
@@ -127,6 +142,10 @@ public class EnemyController : MonoBehaviour
                     if (rb != null)
                     {
                         rb.AddExplosionForce(blastForce, transform.position, blastRadius);
+                        Destroy(gameObject, 0.5f);
+                        SpawnManager.enemiesCount--;
+                        GameObject hitInstance = Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
+                        Destroy(hitInstance, hitInstance.GetComponent<ParticleSystem>().main.startLifetimeMultiplier);
                     }
                 }
                 break;

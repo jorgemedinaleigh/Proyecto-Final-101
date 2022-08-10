@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] public int waveNumber = 1;
+    [SerializeField] public int waveNumber = 0;
     [SerializeField] GameObject[] spawnTunnels;
 
     public static int enemiesCount = 0;
 
     void Start()
     {
-        waveNumber = 1;    
+        
     }
 
     void Update()
