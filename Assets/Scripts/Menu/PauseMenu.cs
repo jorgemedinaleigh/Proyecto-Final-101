@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] GameObject gameUI;
     [SerializeField] GameObject deathMenuUI;
-    [SerializeField] GameObject player;
+    [SerializeField] PlayerStatsController player;
     [SerializeField] TextMeshProUGUI finalWaveText;
     [SerializeField] TextMeshProUGUI timeSurvivedText;
 
@@ -77,12 +77,16 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Quit button pressed!");
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
         Application.Quit();
+        #endif
     }
 
     public void PlayerDeath()
     {
-        if(player.GetComponent<PlayerStatsController>().isDead)
+        if(player.isDead)
         {
             Time.timeScale = 0f;
             deathMenuUI.SetActive(true);
@@ -91,9 +95,11 @@ public class PauseMenu : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            finalWave = gameObject.GetComponentInParent<UIController>().enemyWave - 1f;
+            var uiController = gameObject.GetComponentInChildren<UIController>(true);
+            
+            finalWave = uiController.enemyWave - 1f;
             finalWaveText.text = "Waves Overcome: " + finalWave.ToString();
-            timeSurvived = gameObject.GetComponentInParent<UIController>().timer;
+            timeSurvived = uiController.timer;
             timeSurvivedText.text = "Time Survived: " + timeSurvived.ToString();
         }
     }
