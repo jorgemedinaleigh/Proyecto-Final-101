@@ -29,13 +29,18 @@ public class WeaponController : MonoBehaviour
     }
 
     public void Shoot()
-    {
+    {                
+        if (reloading)
+        {
+             return; 
+        }
+        
         switch (weaponStats.weaponType)
         {
             case WeaponType.REVOLVER:
                 if (Time.time >= nextFire)
-                {
-                    if(bulletsLeft > 0 && !reloading)
+                {                                        
+                    if(bulletsLeft > 0)
                     {
                         nextFire = Time.time + weaponStats.fireRate;
                         OneShot();
@@ -50,7 +55,7 @@ public class WeaponController : MonoBehaviour
             case WeaponType.SMG:
                 if (Time.time >= nextFire)
                 {
-                    if (bulletsLeft > 0 && !reloading)
+                    if (bulletsLeft > 0)
                     {
                         nextFire = Time.time + weaponStats.fireRate;
                         OneShot();
@@ -65,7 +70,7 @@ public class WeaponController : MonoBehaviour
             case WeaponType.SHOTGUN:
                 if(Time.time >= nextFire)
                 {
-                    if(bulletsLeft > 0 && !reloading)
+                    if(bulletsLeft > 0)
                     {
                         bulletsShot = weaponStats.bulletsPerTap;
                         nextFire = Time.time + weaponStats.fireRate;
@@ -82,7 +87,7 @@ public class WeaponController : MonoBehaviour
             case WeaponType.RIFLE:
                 if (Time.time >= nextFire)
                 {
-                    if (bulletsLeft > 0 && !reloading)
+                    if (bulletsLeft > 0)
                     {
                         nextFire = Time.time + weaponStats.fireRate;
                         OneShot();
@@ -126,7 +131,7 @@ public class WeaponController : MonoBehaviour
 
         if(bulletsShot > 0)
         {
-            Invoke("ShotgunShot", 0f);
+            Invoke(nameof(ShotgunShot), 0f);
         }
     }
 
