@@ -6541,7 +6541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &513713985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7175,6 +7175,7 @@ GameObject:
   - component: {fileID: 580908418}
   - component: {fileID: 580908417}
   - component: {fileID: 580908419}
+  - component: {fileID: 580908420}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -7249,6 +7250,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580908415}
   m_Mesh: {fileID: 0}
+--- !u!114 &580908420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580908415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4130e62290d8eb4ead644a5d6f02eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerArmor: 0
+  playerHP: 100
+  isDead: 0
 --- !u!1 &585376488 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2434803739603313683, guid: b9d7b6ff0bad5674f91cd01cb9079d9b, type: 3}
@@ -8373,7 +8389,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 861110728}
   gameUI: {fileID: 1001919768}
   deathMenuUI: {fileID: 1225478221}
-  player: {fileID: 1380460085}
+  player: {fileID: 580908420}
   finalWaveText: {fileID: 129706371}
   timeSurvivedText: {fileID: 1206559111}
 --- !u!1 &707957786
@@ -11554,7 +11570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnManager: {fileID: 513713984}
-  player: {fileID: 1380460085}
+  player: {fileID: 580908420}
   weapon: {fileID: 1092708112}
   waveNumberText: {fileID: 1041111149}
   timerText: {fileID: 1493622918}
@@ -16609,7 +16625,6 @@ GameObject:
   - component: {fileID: 1380460089}
   - component: {fileID: 1380460088}
   - component: {fileID: 1380460087}
-  - component: {fileID: 1380460090}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Player
@@ -16696,21 +16711,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380460085}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1380460090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1380460085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4130e62290d8eb4ead644a5d6f02eb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerArmor: 0
-  playerHP: 100
-  isDead: 0
 --- !u!1001 &1383005198
 PrefabInstance:
   m_ObjectHideFlags: 0
