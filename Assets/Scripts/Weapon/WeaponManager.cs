@@ -3,13 +3,18 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     private GameObject weaponInRadius;
-    private WeaponController currentHeldWeapon;
+    private static WeaponController currentHeldWeapon;
     private Camera cam;
 
     [SerializeField] private KeyCode pickUpKey = KeyCode.E;
     [SerializeField] private KeyCode dropKey = KeyCode.Q;
     [SerializeField] private KeyCode reloadKey = KeyCode.R;
     [SerializeField] private GameObject weaponHolder;
+
+    public static WeaponController CurrentWeapon 
+    { 
+        get { return currentHeldWeapon; }
+    }
 
     private void Start()
     {
@@ -81,6 +86,11 @@ public class WeaponManager : MonoBehaviour
         {
             weaponInRadius = null;
         }
+    }
+
+    private void OnDestroy()
+    {
+        currentHeldWeapon = null;
     }
 }
 public enum WeaponType

@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     private GameObject player;
     private float currentEnemyHP;
 
+    bool isAttacking;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -35,11 +37,14 @@ public class EnemyController : MonoBehaviour
         }
 
         Vector3 playerPosition = player.transform.position;
-        PersuePlayer(playerPosition);
-
-        if(enemyStats.rangeToAttack >= Vector3.Distance(transform.position, playerPosition))
-        {
-            AttackPlayer();
+        
+        if(!isAttacking)
+        {            
+            PersuePlayer(playerPosition);
+            if(enemyStats.rangeToAttack >= Vector3.Distance(transform.position, playerPosition))
+            {
+                StartCoroutine(AttackPlayer());
+            }
         }
     }
 
@@ -124,11 +129,13 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void AttackPlayer()
-    {
+    public IEnumerator AttackPlayer()
+    {        
+        isAttacking = true; // atack started
+
         animController.SetFloat("Speed", 0);
         agent.speed = 0;
-        StartCoroutine(WaitForAttackAnimation());
+        yield return StartCoroutine(WaitForAttackAnimation());
 
         switch (enemyStats.enemyType)
         {
@@ -146,6 +153,7 @@ public class EnemyController : MonoBehaviour
                         SpawnManager.enemiesCount--;
                         GameObject hitInstance = Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
                         Destroy(hitInstance, hitInstance.GetComponent<ParticleSystem>().main.startLifetimeMultiplier);
+                        yield break;
                     }
                 }
                 break;
@@ -157,6 +165,9 @@ public class EnemyController : MonoBehaviour
 
         animController.SetFloat("Speed", enemyStats.movementSpeed);
         agent.speed = enemyStats.movementSpeed;
+
+        yield return null; // esperar un fotograma
+        isAttacking = false;
     }  
     
     void SetEnemyStats()

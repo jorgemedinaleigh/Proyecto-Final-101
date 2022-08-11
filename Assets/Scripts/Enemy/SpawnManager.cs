@@ -6,12 +6,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] public int waveNumber = 0;
     [SerializeField] GameObject[] spawnTunnels;
 
-    public static int enemiesCount = 0;
-
-    void Start()
-    {
-        
-    }
+    public static int enemiesCount = 0;    
 
     void Update()
     {
@@ -42,5 +37,10 @@ public class SpawnManager : MonoBehaviour
         {
             enemiesCount = FindObjectsOfType<EnemyController>().Length;
         }
+    }
+
+    void OnDestroy()
+    {
+        enemiesCount = 0;
     }
 }

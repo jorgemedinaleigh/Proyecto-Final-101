@@ -4,7 +4,7 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     [SerializeField] GameObject spawnManager;
-    [SerializeField] GameObject player;
+    [SerializeField] PlayerStatsController player;
     [SerializeField] GameObject weapon;
     [SerializeField] TextMeshProUGUI waveNumberText;
     [SerializeField] TextMeshProUGUI timerText;
@@ -51,18 +51,18 @@ public class UIController : MonoBehaviour
 
     void DisplayPlayerStats()
     {
-        playerHP = player.GetComponent<PlayerStatsController>().playerHP;
-        playerArmor = player.GetComponent<PlayerStatsController>().playerArmor;
+        playerHP = player.playerHP;
+        playerArmor = player.playerArmor;
         playerHPText.text = playerHP.ToString();
         playerArmorText.text = playerArmor.ToString();
     }
 
     void DisplayWeaponAmmo()
     {
-        if(weapon.GetComponentInChildren<WeaponController>() != null)
+        if(WeaponManager.CurrentWeapon != null)
         {
-            weaponAmmo = weapon.GetComponent<WeaponController>().totalBullets;
-            ammoLeft = weapon.GetComponent<WeaponController>().bulletsLeft;
+            weaponAmmo = WeaponManager.CurrentWeapon.totalBullets;
+            ammoLeft = WeaponManager.CurrentWeapon.bulletsLeft;
             weaponAmmoText.text = ammoLeft.ToString() + "/" + weaponAmmo.ToString();
         }
         else
