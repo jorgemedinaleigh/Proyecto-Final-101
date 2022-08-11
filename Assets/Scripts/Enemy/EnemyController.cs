@@ -13,7 +13,6 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject player;
     private float currentEnemyHP;
-
     bool isAttacking;
 
     void Start()
@@ -149,14 +148,13 @@ public class EnemyController : MonoBehaviour
                     if (rb != null)
                     {
                         rb.AddExplosionForce(blastForce, transform.position, blastRadius);
-                        Destroy(gameObject, 0.5f);
-                        SpawnManager.enemiesCount--;
-                        GameObject hitInstance = Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
-                        Destroy(hitInstance, hitInstance.GetComponent<ParticleSystem>().main.startLifetimeMultiplier);
-                        yield break;
-                    }
+                    }                                        
                 }
-                break;
+                Destroy(gameObject, 0.1f);
+                SpawnManager.enemiesCount--;
+                GameObject hitInstance = Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
+                Destroy(hitInstance, hitInstance.GetComponent<ParticleSystem>().main.startLifetimeMultiplier);
+                yield break;
             case EnemyType.SNIPER:
                 break;
             case EnemyType.GUNNER:

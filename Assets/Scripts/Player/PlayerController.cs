@@ -64,7 +64,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (GameUtils.IsGamePaused){ return; }
+        if (GameUtils.IsGamePaused)
+        { 
+            return; 
+        }
         
         MyInput();
         Look();

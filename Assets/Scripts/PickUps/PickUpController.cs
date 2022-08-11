@@ -20,10 +20,10 @@ public class PickUpController : MonoBehaviour
 
                     break;
                 case PickUpType.ARMOR:
-                    other.GetComponent<PlayerStatsController>().playerArmor += pickUpStats.pointsToAdd;
+                    other.GetComponentInParent<PlayerStatsController>().playerArmor += pickUpStats.pointsToAdd;
                     break;
                 case PickUpType.MEDKIT:
-                    other.GetComponent<PlayerStatsController>().playerHP += pickUpStats.pointsToAdd;
+                    other.GetComponentInParent<PlayerStatsController>().playerHP += pickUpStats.pointsToAdd;
                     break;
             }
 

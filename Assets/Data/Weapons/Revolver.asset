@@ -16,7 +16,7 @@ MonoBehaviour:
   magazineSize: 6
   bulletsPerTap: 1
   spread: 0
-  reloadTime: 2
+  reloadTime: 1
   damagePerShot: 10
   bulletSpeed: 3000
   bullet: {fileID: 4055493366138746844, guid: da599dcc3375822428ca6914ba75621e, type: 3}

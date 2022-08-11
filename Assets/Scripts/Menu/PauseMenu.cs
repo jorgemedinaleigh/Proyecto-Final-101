@@ -99,8 +99,12 @@ public class PauseMenu : MonoBehaviour
             
             finalWave = uiController.enemyWave - 1f;
             finalWaveText.text = "Waves Overcome: " + finalWave.ToString();
+
             timeSurvived = uiController.timer;
-            timeSurvivedText.text = "Time Survived: " + timeSurvived.ToString();
+            float minutes = Mathf.FloorToInt(timeSurvived / 60);
+            float seconds = Mathf.FloorToInt(timeSurvived % 60);
+            float milliseconds = (timeSurvived % 1) * 1000;
+            timeSurvivedText.text = "Time Survived: " + string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
         }
     }
 }

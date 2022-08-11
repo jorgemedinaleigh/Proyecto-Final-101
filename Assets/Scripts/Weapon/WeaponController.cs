@@ -25,7 +25,7 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
-        shotSFX = GetComponent<AudioSource>();
+        shotSFX = GetComponent<AudioSource>();        
     }
 
     public void Shoot()
@@ -34,71 +34,26 @@ public class WeaponController : MonoBehaviour
         {
              return; 
         }
-        
-        switch (weaponStats.weaponType)
+        else if(Time.time >= nextFire && bulletsLeft > 0)
         {
-            case WeaponType.REVOLVER:
-                if (Time.time >= nextFire)
-                {                                        
-                    if(bulletsLeft > 0)
-                    {
-                        nextFire = Time.time + weaponStats.fireRate;
-                        OneShot();
-                        shotSFX.Play();
-                    }
-                    else
-                    {
-                        Reload();
-                    }
-                }
-                break;
-            case WeaponType.SMG:
-                if (Time.time >= nextFire)
-                {
-                    if (bulletsLeft > 0)
-                    {
-                        nextFire = Time.time + weaponStats.fireRate;
-                        OneShot();
-                        shotSFX.Play();
-                    }
-                    else
-                    {
-                        Reload();
-                    }
-                }
-                break;
-            case WeaponType.SHOTGUN:
-                if(Time.time >= nextFire)
-                {
-                    if(bulletsLeft > 0)
-                    {
-                        bulletsShot = weaponStats.bulletsPerTap;
-                        nextFire = Time.time + weaponStats.fireRate;
-                        ShotgunShot();
-                        bulletsLeft--;
-                        shotSFX.Play();
-                    }
-                    else
-                    {
-                        Reload();
-                    }
-                }
-                break;
-            case WeaponType.RIFLE:
-                if (Time.time >= nextFire)
-                {
-                    if (bulletsLeft > 0)
-                    {
-                        nextFire = Time.time + weaponStats.fireRate;
-                        OneShot();
-                    }
-                    else
-                    {
-                        Reload();
-                    }
-                }
-                break;
+            nextFire = Time.time + weaponStats.fireRate;
+            shotSFX.Play();
+
+            if(weaponStats.weaponType == WeaponType.SHOTGUN)
+            {
+                bulletsShot = weaponStats.bulletsPerTap;
+                ShotgunShot();
+                bulletsLeft--;
+            }
+            else
+            {
+                OneShot();
+            }
         }
+        else if(bulletsLeft <= 0)
+        {
+            Reload();
+        }        
     }
 
     private void OneShot()
@@ -156,9 +111,9 @@ public class WeaponController : MonoBehaviour
     {
         if(!reloading)
         {
-            reloading = true;
-            reloadSFX = gameObject.transform.parent.GetComponent<AudioSource>();
+            reloading = true;            
             GetComponent<Animator>().SetTrigger("Reload");
+            reloadSFX = gameObject.transform.parent.GetComponent<AudioSource>();
             reloadSFX.Play();
             Invoke("ReloadFinished", weaponStats.reloadTime);
         }

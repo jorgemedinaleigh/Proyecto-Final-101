@@ -3,7 +3,7 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] GameObject spawnManager;
+    [SerializeField] SpawnManager spawnManager;
     [SerializeField] PlayerStatsController player;
     [SerializeField] GameObject weapon;
     [SerializeField] TextMeshProUGUI waveNumberText;
@@ -45,7 +45,7 @@ public class UIController : MonoBehaviour
 
     void DisplayEnemyWave()
     {
-        enemyWave = spawnManager.GetComponent<SpawnManager>().waveNumber;
+        enemyWave = spawnManager.waveNumber;
         waveNumberText.text = "Wave: " + enemyWave.ToString();
     }
 

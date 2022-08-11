@@ -451,10 +451,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: e649ab925ba8f20419e72a442acaef63, type: 2}
   animController: {fileID: 3711103707302454592}
-  hitParticles: {fileID: 0}
   explosionEffect: {fileID: 0}
-  blastRadius: 0
-  blastForce: 0
+  blastRadius: 5
+  blastForce: 100
 --- !u!195 &6416089532212334102
 NavMeshAgent:
   m_ObjectHideFlags: 0
