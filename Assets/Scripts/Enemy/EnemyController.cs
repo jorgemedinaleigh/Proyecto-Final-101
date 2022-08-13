@@ -8,7 +8,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Animator animController;
     [SerializeField] GameObject explosionEffect;
     [SerializeField] Transform attackPoint;
-    [SerializeField] LayerMask playerLayer;
 
     NavMeshAgent agent;
     GameObject player;
@@ -51,6 +50,7 @@ public class EnemyController : MonoBehaviour
 
     public void PersuePlayer(Vector3 playerPosition)
     {
+        transform.LookAt(playerPosition);
         agent.destination = playerPosition;
 
         if(animController != null)
@@ -128,8 +128,10 @@ public class EnemyController : MonoBehaviour
                 Destroy(hitInstance, hitInstance.GetComponent<ParticleSystem>().main.startLifetimeMultiplier);
                 yield break;
             case EnemyType.SNIPER:
+                ShootPlayer();
                 break;
             case EnemyType.GUNNER:
+                ShootPlayer();
                 break;
         }
 
@@ -139,6 +141,14 @@ public class EnemyController : MonoBehaviour
         agent.speed = enemyStats.movementSpeed;
     }  
     
+    void ShootPlayer()
+    {
+        GameObject bulletInstance = Instantiate(enemyStats.bullet, attackPoint.position, attackPoint.rotation);
+        var rb = bulletInstance.GetComponent<Rigidbody>();
+        bulletInstance.GetComponent<EnemyBulletController>().bulletDamage = enemyStats.damagePerAttack;
+        rb.AddRelativeForce(Vector3.forward * enemyStats.bulletSpeed, ForceMode.Impulse);
+    }
+
     void SetEnemyStats()
     {
         currentEnemyHP = enemyStats.healthPoints;

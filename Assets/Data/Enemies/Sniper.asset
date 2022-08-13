@@ -16,6 +16,6 @@ MonoBehaviour:
   rangeToAttack: 10
   damagePerAttack: 30
   movementSpeed: 2
-  bulletSpeed: 0
-  bullet: {fileID: 0}
+  bulletSpeed: 15
+  bullet: {fileID: 5386147338221730391, guid: e6c611839661aba4d9e27e0d20a0819a, type: 3}
   enemyType: 3
