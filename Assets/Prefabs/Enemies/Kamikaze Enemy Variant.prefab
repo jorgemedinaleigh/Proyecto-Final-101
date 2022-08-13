@@ -82,6 +82,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!4 &7951207012018095444 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 528d0fefd0dd4c7439d4c7343e6fa672, type: 3}
+  m_PrefabInstance: {fileID: 7625409848126104255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8973233484845524755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172,8 +177,7 @@ MonoBehaviour:
   enemyStats: {fileID: 11400000, guid: 541fccced487ff44682d2d2cd9db0b45, type: 2}
   animController: {fileID: 8526961843831310038}
   explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-  blastRadius: 5
-  blastForce: 1000
+  attackPoint: {fileID: 7951207012018095444}
 --- !u!195 &-105394775115860071
 NavMeshAgent:
   m_ObjectHideFlags: 0

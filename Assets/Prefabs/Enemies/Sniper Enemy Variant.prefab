@@ -69,6 +69,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ee10678ec897cf4682c2c1bf7158681, type: 3}
+--- !u!4 &425936706267605760 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9ee10678ec897cf4682c2c1bf7158681, type: 3}
+  m_PrefabInstance: {fileID: 172124491002678507}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1054664205855175098 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9ee10678ec897cf4682c2c1bf7158681, type: 3}
@@ -188,10 +193,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: 474e4e301a581574a90d8379bd457c86, type: 2}
   animController: {fileID: 8749648142516531560}
-  hitParticles: {fileID: 0}
   explosionEffect: {fileID: 0}
-  blastRadius: 0
-  blastForce: 0
+  attackPoint: {fileID: 425936706267605760}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!195 &8635516749008358208
 NavMeshAgent:
   m_ObjectHideFlags: 0

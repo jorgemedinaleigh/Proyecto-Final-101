@@ -7,6 +7,8 @@ public class PlayerStatsController : MonoBehaviour
 
     public bool isDead = false;
 
+    float damageDiff;
+
     void Start()
     {
         
@@ -24,4 +26,33 @@ public class PlayerStatsController : MonoBehaviour
             isDead = true;
         }
     }
+
+    public void HandleDamage(float damage)
+    {
+        if(playerArmor <= 0)
+        {
+            playerHP -= damage;
+            playerArmor = 0;
+            HandleDeath();
+        }
+        else if(playerArmor - damage >= 0)
+        {
+            playerArmor -= damage;
+        }
+        else
+        {
+            damageDiff = Mathf.Abs(playerArmor - damage);
+            playerArmor = 0;
+            playerHP -= damageDiff;
+            HandleDeath();
+        }
+    }
+
+    void HandleDeath()
+    {
+        if(playerHP <= 0)
+        {
+            isDead = true;
+        }
+    }    
 }

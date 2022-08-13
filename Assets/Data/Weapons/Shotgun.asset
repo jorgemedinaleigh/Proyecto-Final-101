@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a96ca9bc71ca6047bcb905876a47085, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  fireRate: 0.8
+  fireRate: 0.5
   magazineSize: 2
   bulletsPerTap: 10
   spread: 200
-  reloadTime: 3
+  reloadTime: 1.5
   damagePerShot: 5
   bulletSpeed: 2500
   bullet: {fileID: 7092348273409560255, guid: ae324db9106e8c040a12dfa7bf8e375e, type: 3}

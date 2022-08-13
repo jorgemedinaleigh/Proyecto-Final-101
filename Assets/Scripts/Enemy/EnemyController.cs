@@ -7,18 +7,20 @@ public class EnemyController : MonoBehaviour
     [SerializeField] EnemyStats enemyStats;
     [SerializeField] Animator animController;
     [SerializeField] GameObject explosionEffect;
-    [SerializeField] float blastRadius;
-    [SerializeField] float blastForce;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] LayerMask playerLayer;
 
-    private NavMeshAgent agent;
-    private GameObject player;
-    private float currentEnemyHP;
+    NavMeshAgent agent;
+    GameObject player;
+    PlayerStatsController playerStatsController;
+    float currentEnemyHP;
     bool isAttacking;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
+        playerStatsController = player.GetComponent<PlayerStatsController>();
 
         SetEnemyStats();
 
@@ -65,7 +67,7 @@ public class EnemyController : MonoBehaviour
 
             if (animController != null)
             {
-                StartCoroutine(WaitForHitAnimation());               
+                animController.SetTrigger("Hit");
             }
             if(currentEnemyHP < 0)
             {
@@ -98,57 +100,27 @@ public class EnemyController : MonoBehaviour
         SpawnManager.enemiesCount--;
     }
 
-    IEnumerator WaitForAttackAnimation()
-    {
-        if (animController != null)
-        {
-            animController.SetTrigger("Attack");
-
-            while (!animController.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-            {   //Wait until the enemy is in the Attack state
-                yield return null;
-            }
-
-            yield return new WaitForSeconds(animController.GetCurrentAnimatorStateInfo(0).length);
-        }
-    }
-
-    IEnumerator WaitForHitAnimation()
-    {
-        if(animController != null)
-        {
-            animController.SetTrigger("Hit");
-
-            while(!animController.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
-            {
-                yield return null;
-            }
-
-            yield return new WaitForSeconds(animController.GetCurrentAnimatorStateInfo(0).length);
-        }
-    }
-
     public IEnumerator AttackPlayer()
     {        
         isAttacking = true; // atack started
 
         animController.SetFloat("Speed", 0);
         agent.speed = 0;
-        yield return StartCoroutine(WaitForAttackAnimation());
+        animController.SetTrigger("Attack");
 
         switch (enemyStats.enemyType)
         {
             case EnemyType.MELEE:
+                if (enemyStats.rangeToAttack >= Vector3.Distance(attackPoint.position, player.transform.position))
+                {
+                    playerStatsController.HandleDamage(enemyStats.damagePerAttack);
+                }
                 break;
             case EnemyType.KAMIKAZE:
-                Collider[] colliders = Physics.OverlapSphere(transform.position, blastRadius);
-                foreach(Collider nearbyObject in colliders)
+                yield return new WaitForSeconds(animController.GetCurrentAnimatorStateInfo(0).length);
+                if (enemyStats.rangeToAttack >= Vector3.Distance(attackPoint.position, player.transform.position))
                 {
-                    Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
-                    if (rb != null)
-                    {
-                        rb.AddExplosionForce(blastForce, transform.position, blastRadius);
-                    }                                        
+                    playerStatsController.HandleDamage(enemyStats.damagePerAttack);
                 }
                 Destroy(gameObject, 0.1f);
                 SpawnManager.enemiesCount--;
@@ -161,11 +133,10 @@ public class EnemyController : MonoBehaviour
                 break;
         }
 
+        yield return new WaitForSeconds(animController.GetCurrentAnimatorStateInfo(0).length);
+        isAttacking = false;        
         animController.SetFloat("Speed", enemyStats.movementSpeed);
         agent.speed = enemyStats.movementSpeed;
-
-        yield return null; // esperar un fotograma
-        isAttacking = false;
     }  
     
     void SetEnemyStats()
@@ -173,6 +144,11 @@ public class EnemyController : MonoBehaviour
         currentEnemyHP = enemyStats.healthPoints;
         agent.speed = enemyStats.movementSpeed;
         agent.stoppingDistance = enemyStats.rangeToAttack;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackPoint.position, enemyStats.rangeToAttack);
     }
 }
 
