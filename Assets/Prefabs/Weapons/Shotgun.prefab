@@ -54,6 +54,7 @@ MonoBehaviour:
   bulletsLeft: 0
   tipOfGun: {fileID: 4722847805082409016}
   muzzleFlash: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+  totalBullets: 0
 --- !u!54 &7850224492727895360
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -92,7 +93,7 @@ AudioSource:
   m_GameObject: {fileID: 4276762358080712095}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 08900ebffe1bdd34f8e275a7bbe12edc, type: 2}
   m_audioClip: {fileID: 8300000, guid: 5003c56018eafba429c0b397bef963b3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
