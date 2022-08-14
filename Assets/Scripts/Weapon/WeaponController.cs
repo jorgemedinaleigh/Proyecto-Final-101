@@ -14,7 +14,7 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField] private Transform tipOfGun;
     [SerializeField] private GameObject muzzleFlash;
-    [SerializeField] public float totalBullets;
+    [SerializeField] public int totalBullets;
 
     private void Awake()
     {
@@ -109,9 +109,14 @@ public class WeaponController : MonoBehaviour
 
     public void Reload()
     {
+        if(totalBullets <= 0)
+        {
+            totalBullets = 0;
+            return;
+        }
         if(!reloading)
         {
-            reloading = true;            
+            reloading = true;          
             GetComponent<Animator>().SetTrigger("Reload");
             reloadSFX = gameObject.transform.parent.GetComponent<AudioSource>();
             reloadSFX.Play();
@@ -121,7 +126,17 @@ public class WeaponController : MonoBehaviour
 
     private void ReloadFinished()
     {
-        bulletsLeft = weaponStats.magazineSize;
+        if(totalBullets < weaponStats.magazineSize)
+        {
+            bulletsLeft = totalBullets;
+            totalBullets = 0;
+        }
+        else
+        {
+            bulletsLeft = weaponStats.magazineSize;
+            totalBullets -= weaponStats.magazineSize;
+        }
+        
         reloading = false;
     }
 }

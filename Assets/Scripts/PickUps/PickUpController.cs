@@ -14,16 +14,21 @@ public class PickUpController : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            switch(pickUpStats.pickUpType)
+            if (other.GetComponentInChildren<WeaponController>() == null)
             {
-                case PickUpType.AMMO:
+                return;
+            }
 
-                    break;
+            switch (pickUpStats.pickUpType)
+            {
                 case PickUpType.ARMOR:
                     other.GetComponentInParent<PlayerStatsController>().playerArmor += pickUpStats.pointsToAdd;
                     break;
                 case PickUpType.MEDKIT:
                     other.GetComponentInParent<PlayerStatsController>().playerHP += pickUpStats.pointsToAdd;
+                    break;
+                default:
+                    other.GetComponentInChildren<WeaponController>().totalBullets += pickUpStats.pointsToAdd;
                     break;
             }
 
@@ -36,5 +41,7 @@ public enum PickUpType
 {
     ARMOR,
     MEDKIT,
-    AMMO
+    REVOLVERAMMO,
+    SHOTGUNAMMO,
+    SMGAMMO
 }

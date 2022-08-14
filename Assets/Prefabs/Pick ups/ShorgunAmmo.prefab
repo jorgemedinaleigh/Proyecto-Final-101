@@ -59,9 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77bb966c1db2ef47b4f6cf2de52aa6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpStats: {fileID: 11400000, guid: 5555049ba306f4b42bc23c02cfcc6ef3, type: 2}
+  pickUpStats: {fileID: 11400000, guid: 9d167c928e581ce4abbc938e349bdb7d, type: 2}
   degreesPerSecond: 70
-  timeToDestroy: 0.1
 --- !u!1001 &1692482941166912285
 PrefabInstance:
   m_ObjectHideFlags: 0

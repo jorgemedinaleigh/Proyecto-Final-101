@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a77133aae38dfd34c9078e96bac8417f, type: 3}
-  m_Name: Ammo
+  m_Name: SMG Ammo
   m_EditorClassIdentifier: 
-  pointsToAdd: 10
-  pickUpType: 2
+  pointsToAdd: 0
+  pickUpType: 0
