@@ -7,7 +7,6 @@ public class WeaponManager : MonoBehaviour
     private Camera cam;
 
     [SerializeField] private KeyCode pickUpKey = KeyCode.E;
-    [SerializeField] private KeyCode dropKey = KeyCode.Q;
     [SerializeField] private KeyCode reloadKey = KeyCode.R;
     [SerializeField] private GameObject weaponHolder;
 
@@ -29,7 +28,6 @@ public class WeaponManager : MonoBehaviour
     private void InputHandler()
     {
         PickUpGun();
-        DropGun();
 
         if (currentHeldWeapon != null && currentHeldWeapon.weaponStats.isRapid && Input.GetMouseButton(0))
         {
@@ -48,27 +46,19 @@ public class WeaponManager : MonoBehaviour
 
     private void PickUpGun()
     {
-        if (Input.GetKeyDown(pickUpKey) && weaponInRadius != null && currentHeldWeapon == null)
+        if (Input.GetKeyDown(pickUpKey) && weaponInRadius != null)
         {
+            if(currentHeldWeapon != null)
+            {
+                Destroy(weaponHolder.transform.GetChild(0).gameObject);
+            }
             weaponInRadius.GetComponent<Rigidbody>().isKinematic = true;
             weaponInRadius.GetComponent<Collider>().enabled = false;
             weaponInRadius.transform.SetParent(weaponHolder.transform);
             LeanTween.moveLocal(weaponInRadius, Vector3.zero, 0.3f);
             LeanTween.rotateLocal(weaponInRadius, Vector3.zero, 0.3f);
             currentHeldWeapon = weaponInRadius.GetComponent<WeaponController>();
-        }        
-    }
-    private void DropGun()
-    {
-        if (Input.GetKeyDown(dropKey) && currentHeldWeapon != null)
-        {
-            weaponInRadius.transform.SetParent(null);
-            currentHeldWeapon = null;
-            var rb = weaponInRadius.GetComponent<Rigidbody>();
-            rb.isKinematic = false;
-            weaponInRadius.GetComponent<Collider>().enabled = true;
-            rb.AddForce(cam.transform.forward * 500);
-            rb.angularVelocity = cam.transform.forward * 500;
+            weaponInRadius = null;
         }        
     }
 

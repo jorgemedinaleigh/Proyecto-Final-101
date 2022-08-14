@@ -54,7 +54,7 @@ MonoBehaviour:
   bulletsLeft: 0
   tipOfGun: {fileID: 3799507431339761843}
   muzzleFlash: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
-  totalBullets: 0
+  totalBullets: 12
 --- !u!54 &296703961668033536
 Rigidbody:
   m_ObjectHideFlags: 0

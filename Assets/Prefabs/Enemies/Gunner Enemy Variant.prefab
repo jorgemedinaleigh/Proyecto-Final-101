@@ -94,8 +94,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6533050464076064857, guid: c6c097bc161433945a58e47f48a9bf2c, type: 3}
   m_PrefabInstance: {fileID: 1450289021065991024}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7606960321879091009
-BoxCollider:
+--- !u!136 &5948741867829997427
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -104,9 +104,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7011534, y: 1.358904, z: 0.5627441}
-  m_Center: {x: 0.008411944, y: 0.79670733, z: 0.044251412}
+  m_Radius: 0.22997437
+  m_Height: 1.3160719
+  m_Direction: 1
+  m_Center: {x: -0.16317533, y: 0.7736611, z: 0}
 --- !u!114 &752374967222003862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +130,7 @@ MonoBehaviour:
   - {fileID: 7800617406758275773, guid: 61ad2a614ce3675478f49479c4fb038d, type: 3}
   - {fileID: 8855853480115469590, guid: 5a13bf64d5f2f244f9ac763990fb5240, type: 3}
   - {fileID: 509465968538143142, guid: 7023fe079e4b7a040bdbd7b38de942b1, type: 3}
+  player: {fileID: 8169900717509068857, guid: d37917b85e21862428784defaeab76a3, type: 3}
 --- !u!195 &3469521630896514902
 NavMeshAgent:
   m_ObjectHideFlags: 0

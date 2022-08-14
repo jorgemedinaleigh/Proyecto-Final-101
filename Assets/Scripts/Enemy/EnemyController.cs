@@ -12,8 +12,8 @@ public class EnemyController : MonoBehaviour
 
     NavMeshAgent agent;
     GameObject player;
-    PlayerStatsController playerStatsController;
-    float currentEnemyHP;
+    PlayerStatsController playerStatsController;    
+    public float currentEnemyHP;
     bool isAttacking;
 
     void Start()
@@ -47,6 +47,11 @@ public class EnemyController : MonoBehaviour
                 StartCoroutine(AttackPlayer());
             }
         }
+
+        if(currentEnemyHP < 0)
+        {
+            currentEnemyHP = 0;
+        }
     }
 
     public void PersuePlayer(Vector3 playerPosition)
@@ -62,7 +67,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Bullet"))
         {
             currentEnemyHP = currentEnemyHP - collision.gameObject.GetComponent<BulletController>().bulletDamage;
 
@@ -70,16 +75,8 @@ public class EnemyController : MonoBehaviour
             {
                 animController.SetTrigger("Hit");
             }
-            if(currentEnemyHP < 0)
-            {
-                currentEnemyHP = 0;
-            }
-            if(currentEnemyHP == 0)
-            {
-                agent.speed = 0;
-                GetComponent<BoxCollider>().enabled = false;
-                StartCoroutine(SetAndWaitForDeathAnimation());
-            }
+
+            HandleDeath();
         }
     }
 
@@ -95,12 +92,7 @@ public class EnemyController : MonoBehaviour
             }
             
             yield return new WaitForSeconds(animController.GetCurrentAnimatorStateInfo(0).length);
-        }
-
-        DropItem();
-
-        Destroy(gameObject, 0.5f);
-        SpawnManager.enemiesCount--;
+        }        
     }
 
     public IEnumerator AttackPlayer()
@@ -155,15 +147,15 @@ public class EnemyController : MonoBehaviour
     void DropItem()
     {
         float randomValue = Random.value;
-        if(randomValue <= 0.15f)
+        if(randomValue <= 0.1f)
         {
             Instantiate(pickupDrops[0], new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z), pickupDrops[0].transform.rotation);
         }
-        else if(randomValue <= 0.4f)
+        else if(randomValue <= 0.35f)
         {
             Instantiate(pickupDrops[1], new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z), pickupDrops[1].transform.rotation);
         }
-        else if(Random.value <= 0.85f)
+        else if(randomValue <= 0.8f)
         {
             if(player.GetComponentInChildren<WeaponController>().weaponStats.weaponType == WeaponType.REVOLVER)
             {
@@ -180,6 +172,18 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    void HandleDeath()
+    {
+        if (currentEnemyHP <= 0)
+        {
+            agent.speed = 0;
+            GetComponent<Collider>().enabled = false;
+            StartCoroutine(SetAndWaitForDeathAnimation());
+            DropItem();
+            Destroy(gameObject, 0.5f);
+            SpawnManager.enemiesCount--;
+        }
+    }
 
     void SetEnemyStats()
     {

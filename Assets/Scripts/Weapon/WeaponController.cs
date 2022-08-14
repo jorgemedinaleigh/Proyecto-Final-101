@@ -41,9 +41,9 @@ public class WeaponController : MonoBehaviour
 
             if(weaponStats.weaponType == WeaponType.SHOTGUN)
             {
+                bulletsLeft--;
                 bulletsShot = weaponStats.bulletsPerTap;
                 ShotgunShot();
-                bulletsLeft--;
             }
             else
             {
@@ -84,7 +84,7 @@ public class WeaponController : MonoBehaviour
 
         bulletsShot--;
 
-        if(bulletsShot > 0)
+        if (bulletsShot > 0)
         {
             Invoke(nameof(ShotgunShot), 0f);
         }
