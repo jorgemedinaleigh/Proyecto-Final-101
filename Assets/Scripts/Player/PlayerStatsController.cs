@@ -9,16 +9,6 @@ public class PlayerStatsController : MonoBehaviour
 
     float damageDiff;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Lava") && !isDead)

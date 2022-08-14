@@ -7,7 +7,7 @@ public class PickUpController : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(new Vector3(0, 0, degreesPerSecond) * Time.deltaTime);
+        transform.Rotate(new Vector3(0, degreesPerSecond, 0) * Time.deltaTime, Space.World);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpStats: {fileID: 11400000, guid: 9d167c928e581ce4abbc938e349bdb7d, type: 2}
-  degreesPerSecond: 70
+  degreesPerSecond: -90
 --- !u!1001 &1692482941166912285
 PrefabInstance:
   m_ObjectHideFlags: 0

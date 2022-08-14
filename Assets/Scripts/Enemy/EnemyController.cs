@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Animator animController;
     [SerializeField] GameObject explosionEffect;
     [SerializeField] Transform attackPoint;
+    [SerializeField] GameObject[] pickupDrops;
 
     NavMeshAgent agent;
     GameObject player;
@@ -96,6 +97,8 @@ public class EnemyController : MonoBehaviour
             yield return new WaitForSeconds(animController.GetCurrentAnimatorStateInfo(0).length);
         }
 
+        DropItem();
+
         Destroy(gameObject, 0.5f);
         SpawnManager.enemiesCount--;
     }
@@ -148,6 +151,35 @@ public class EnemyController : MonoBehaviour
         bulletInstance.GetComponent<EnemyBulletController>().bulletDamage = enemyStats.damagePerAttack;
         rb.AddRelativeForce(Vector3.forward * enemyStats.bulletSpeed, ForceMode.Impulse);
     }
+
+    void DropItem()
+    {
+        float randomValue = Random.value;
+        if(randomValue <= 0.15f)
+        {
+            Instantiate(pickupDrops[0], new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z), pickupDrops[0].transform.rotation);
+        }
+        else if(randomValue <= 0.4f)
+        {
+            Instantiate(pickupDrops[1], new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z), pickupDrops[1].transform.rotation);
+        }
+        else if(Random.value <= 0.85f)
+        {
+            if(player.GetComponentInChildren<WeaponController>().weaponStats.weaponType == WeaponType.REVOLVER)
+            {
+                Instantiate(pickupDrops[2], new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z), pickupDrops[2].transform.rotation);
+            }
+            else if(player.GetComponentInChildren<WeaponController>().weaponStats.weaponType == WeaponType.SHOTGUN)
+            {
+                Instantiate(pickupDrops[3], new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z), pickupDrops[3].transform.rotation);
+            }
+            else if(player.GetComponentInChildren<WeaponController>().weaponStats.weaponType == WeaponType.SMG)
+            {
+                Instantiate(pickupDrops[4], new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z), pickupDrops[4].transform.rotation);
+            }
+        }
+    }
+
 
     void SetEnemyStats()
     {

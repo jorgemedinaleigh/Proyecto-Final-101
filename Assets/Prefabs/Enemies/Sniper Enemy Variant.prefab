@@ -221,6 +221,12 @@ MonoBehaviour:
   animController: {fileID: 8749648142516531560}
   explosionEffect: {fileID: 0}
   attackPoint: {fileID: 6692099244736541355}
+  pickupDrops:
+  - {fileID: 5571056831334963344, guid: 233c94932cd699e4e835edc57a4acaa8, type: 3}
+  - {fileID: 1268475872108408154, guid: 2516400b6df2c7f418d84f23914dadaa, type: 3}
+  - {fileID: 7800617406758275773, guid: 61ad2a614ce3675478f49479c4fb038d, type: 3}
+  - {fileID: 8855853480115469590, guid: 5a13bf64d5f2f244f9ac763990fb5240, type: 3}
+  - {fileID: 509465968538143142, guid: 7023fe079e4b7a040bdbd7b38de942b1, type: 3}
 --- !u!195 &8635516749008358208
 NavMeshAgent:
   m_ObjectHideFlags: 0

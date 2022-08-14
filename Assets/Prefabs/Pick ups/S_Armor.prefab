@@ -111,6 +111,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpStats: {fileID: 11400000, guid: 13b9f251081d582469c7ad9f01b3b46d, type: 2}
-  degreesPerSecond: 90
-  pointsToAdd: 0
-  pickUpType: 
+  degreesPerSecond: -90
